@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO Jira Ticket 总表（2026-08-18）</title>
+<style>
+  :root {
+    --bg: #f5f6fa; --card: #fff; --ink: #1f2430; --muted: #6b7280; --line: #e5e7eb;
+    --blue: #2563eb; --blue-bg: #eff6ff; --green: #16a34a; --green-bg: #f0fdf4;
+    --red: #dc2626; --red-bg: #fef2f2; --amber: #d97706; --amber-bg: #fffbeb;
+    --purple: #7c3aed; --purple-bg: #f5f3ff; --teal: #0d9488; --teal-bg: #f0fdfa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.6; padding: 28px 16px 60px;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; }
+  header {
+    background: linear-gradient(135deg, #1e3a8a, #2563eb); border-radius: 14px;
+    padding: 24px 32px; color: #fff; margin-bottom: 22px; box-shadow: 0 6px 20px rgba(37,99,235,.25);
+  }
+  header h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  header .meta { font-size: 13px; opacity: .88; }
+  header .badges { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .badge {
+    display: inline-block; padding: 2px 10px; border-radius: 999px;
+    font-size: 11px; font-weight: 600; white-space: nowrap;
+  }
+  .badge.light { background: rgba(255,255,255,.16); color: #fff; }
+  .badge.b { background: var(--blue-bg); color: var(--blue); border: 1px solid #bfdbfe; }
+  .badge.g { background: var(--green-bg); color: var(--green); border: 1px solid #bbf7d0; }
+  .badge.r { background: var(--red-bg); color: var(--red); border: 1px solid #fecaca; }
+  .badge.a { background: var(--amber-bg); color: var(--amber); border: 1px solid #fde68a; }
+  .badge.p { background: var(--purple-bg); color: var(--purple); border: 1px solid #ddd6fe; }
+  .badge.t { background: var(--teal-bg); color: var(--teal); border: 1px solid #99f6e4; }
+  .badge.gray { background: #f3f4f6; color: #4b5563; border: 1px solid #e5e7eb; }
+
+  .epic-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,.04);
+    overflow: hidden;
+  }
+  .epic-header {
+    background: #f8fafc; padding: 13px 20px; border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  }
+  .epic-header .name { font-size: 15.5px; font-weight: 700; color: var(--blue); }
+  .epic-header .epic-badge { font-size: 11px; background: #dbeafe; color: #1d4ed8; border-radius: 6px; padding: 2px 8px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th {
+    background: #f1f5f9; color: #475569; font-weight: 600;
+    padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--line);
+    font-size: 12px; white-space: nowrap;
+  }
+  tbody td { padding: 7px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+  tbody tr:hover { background: #fafbfe; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+  .ticket-link { color: var(--blue); text-decoration: none; font-weight: 500; }
+  .ticket-link:hover { text-decoration: underline; }
+  .en { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; color: #1d4ed8; }
+  .sub { border-left: 3px solid #93c5fd; margin-left: 8px; }
+
+  .goal-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-left: 4px solid var(--blue); border-radius: 12px;
+    margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,.04);
+    padding: 14px 20px;
+  }
+  .goal-header { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .goal-header .goal-badge { font-size: 12px; background: #dbeafe; color: #1d4ed8; border-radius: 6px; padding: 2px 10px; }
+  .goal-header .goal-name { font-size: 15.5px; font-weight: 700; color: var(--ink); }
+  .goal-desc { font-size: 13px; color: var(--muted); margin-top: 6px; padding-left: 4px; }
+
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; margin: 16px 0; }
+  .summary-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: 12px 16px; text-align: center;
+  }
+  .summary-card .num { font-size: 22px; font-weight: 700; color: var(--blue); }
+  .summary-card .lbl { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  .rule-box {
+    border-left: 4px solid var(--amber); background: var(--amber-bg);
+    padding: 12px 18px; border-radius: 0 10px 10px 0; margin: 18px 0;
+    font-size: 13.5px;
+  }
+  .rule-box code {
+    background: #fef3c7; padding: 1px 6px; border-radius: 4px;
+    font-family: ui-monospace, monospace; font-size: 12.5px;
+  }
+  h2.section-title {
+    font-size: 17px; font-weight: 700; margin: 28px 0 14px;
+    padding-left: 10px; border-left: 4px solid var(--blue);
+  }
+  .status-tag { display: inline-block; padding: 1px 8px; border-radius: 6px; font-size: 11.5px; font-weight: 600; }
+  .st-sched { background: var(--amber-bg); color: var(--amber); border: 1px solid #fde68a; }
+  .st-dev { background: var(--blue-bg); color: var(--blue); border: 1px solid #bfdbfe; }
+  .st-done { background: var(--green-bg); color: var(--green); border: 1px solid #bbf7d0; }
+  .st-closed { background: #f3f4f6; color: #4b5563; border: 1px solid #e5e7eb; }
+  .st-backlog { background: var(--purple-bg); color: var(--purple); border: 1px solid #ddd6fe; }
+  .st-watch { background: var(--red-bg); color: var(--red); border: 1px solid #fecaca; }
+  .st-new { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+  .st-pending { background: #f0fdf4; color: #16a34a; border: 1px dashed #86efac; }
+  .st-ip { background: var(--teal-bg); color: var(--teal); border: 1px solid #99f6e4; }
+  .st-prd { background: var(--purple-bg); color: var(--purple); border: 1px solid #ddd6fe; }
+  .st-triage { background: var(--amber-bg); color: var(--amber); border: 1px solid #fde68a; }
+  .pri { display: inline-block; padding: 1px 9px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+  .pri-p0 { background: var(--red-bg); color: var(--red); border: 1px solid #fecaca; }
+  .pri-p1 { background: var(--amber-bg); color: var(--amber); border: 1px solid #fde68a; }
+  .pri-p2 { background: #f3f4f6; color: #64748b; border: 1px solid #e5e7eb; }
+  .upd-flag { display: inline-block; font-size: 11px; color: var(--red); font-weight: 700; margin-left: 6px; }
+  .new-flag { display: inline-block; font-size: 11px; color: var(--teal); font-weight: 700; margin-left: 6px; }
+  .foot-note { font-size: 12.5px; color: var(--muted); background: var(--card); border: 1px dashed var(--line); border-radius: 10px; padding: 10px 16px; margin-top: 14px; }
+  footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 24px; }
+  @media (max-width: 760px) { table { font-size: 12px; } td, th { padding: 5px 8px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>SEO Jira Ticket 总表</h1>
+  <div class="meta">2026-08-18 ｜ 7 Epic ✅ · 76 关联 ✅ · 29 新建 ✅ · 5 状态更新 ✅ · 6 已覆盖不新建 · 📋 补录 11 · 📊 P0×19 / P1×27 / P2×8</div>
+  <div class="badges">
+    <span class="badge light">🏗 建 Epic</span>
+    <span class="badge light">🎯 FY27 目标 UC-105</span>
+    <span class="badge light">🎫 新建 Ticket（EN）</span>
+    <span class="badge light">🔗 关联工单</span>
+    <span class="badge light">🔄 状态更新</span>
+    <span class="badge light">✅ 已覆盖不新建</span>
+    <span class="badge a">📋 盘点补录</span>
+    <span class="badge light">📊 优先级 P0/P1/P2</span>
+  </div>
+</header>
+
+<div class="rule-box">
+  <strong>统一规则</strong><br>
+  ① 层级：板块 → Epic → Ticket → Sub-ticket（需单独拉评审才拆）；一次评审 = 一个 Ticket<br>
+  ② 新建 Ticket：标题英文，内容先英再中<br>
+  ③ 标签：<code>Business Area: UG - SEO</code> ｜ <code>Dependency Scope: Dev</code> ｜ <code>Dependency Status: To Be Scheduled</code><br>
+  ④ Dependency Status = <b>更新后的应有状态</b>；标注 <b class="upd-flag">🔄 需更新</b> 的表示需要动手更新，直接按此修改<br>
+  ⑤ 优先级：<b style="color:var(--red)">P0</b> 进行中/高影响（开发、推全、异常需跟、DDL 临近）｜<b style="color:var(--amber)">P1</b> 待排期/重要｜<b style="color:var(--muted)">P2</b> 待调研/一般
+</div>
+
+<!-- ===== FY27 业务目标 ===== -->
+<div class="goal-card">
+  <div class="goal-header">
+    <span class="goal-badge">🎯 业务目标</span>
+    <a href="https://visable.atlassian.net/browse/UC-105" target="_blank" class="ticket-link">UC-105</a>
+    <span class="goal-name">SEO — FY27 Goal</span>
+  </div>
+  <div class="goal-desc">SEO FY27 Goal：D-AB2 43 → 180（4.2x）；FY27 Q4 目标 D-UV 71,251 / D-AB 373 / UV→AB 0.5% / AB→AB2 48.3%；月度拆解见 ticket 描述；保持 UC-104 父级</div>
+</div>
+
+<!-- ===== Epic 1 ===== -->
+<div class="epic-card">
+  <div class="epic-header"><span class="epic-badge">Epic 1</span><a href="https://visable.atlassian.net/browse/UC-376" target="_blank" class="ticket-link"><span class="name">🥗 Diet 做减法</span></a><span class="epic-badge" style="background:#bbf7d0;color:#166534">UC-376 ✅</span></div>
+  <table>
+    <thead><tr><th style="width:140px">Ticket</th><th style="width:300px">标题</th><th style="width:60px">优先级</th><th style="width:170px">Dependency Status</th><th style="width:70px">Dep Scope</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1112" target="_blank">ARISE-1112</a></td><td>一期-缩减 filter（剔内链+剔 sitemap）</td><td><span class="pri pri-p0">P0</span></td><td><span class="status-tag st-sched">灰度中</span></td><td>Dev</td><td>保持；上线后 → Done</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1251" target="_blank">ARISE-1251</a></td><td>移除低效 SERP URL</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-closed">Closed</span></td><td>Dev</td><td>保持；同时覆盖 W32 索引膨胀（CSERP 部分）</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-277" target="_blank">UC-277</a></td><td>移除低质 CPP URL</td><td><span class="pri pri-p0">P0</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>Dev</td><td>保持</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1248" target="_blank">ARISE-1248</a></td><td>有曝光垃圾词下线（301）</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-closed">Closed</span></td><td>Dev</td><td>保持；覆盖 W32 蚕食治理（301 部分）</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1253" target="_blank">ARISE-1253</a></td><td>二期-filter 强信号 canonical</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-backlog">待排期</span></td><td>Dev</td><td>保持</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1254" target="_blank">ARISE-1254</a></td><td>二期-缩减分页</td><td><span class="pri pri-p2">P2</span></td><td><span class="status-tag st-backlog">待排期</span></td><td>Dev</td><td>保持</td></tr>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== Epic 2 ===== -->
+<div class="epic-card">
+  <div class="epic-header"><span class="epic-badge">Epic 2</span><a href="https://visable.atlassian.net/browse/UC-137" target="_blank" class="ticket-link"><span class="name">📈 Growth 拓词 · 词库</span></a><span class="epic-badge" style="background:#bbf7d0;color:#166534">UC-137 ✅</span></div>
+  <table>
+    <thead><tr><th style="width:140px">Ticket</th><th style="width:300px">标题</th><th style="width:60px">优先级</th><th style="width:170px">Dependency Status</th><th style="width:70px">Dep Scope</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1092" target="_blank">ARISE-1092</a></td><td>一期+二期新增关键词</td><td><span class="pri pri-p0">P0</span></td><td><span class="status-tag st-sched">推全中（二期待分析）</span></td><td>Dev</td><td>保持；二期目标更新为 2w/月/站</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-381" target="_blank">UC-381</a> <span class="new-flag">✅ 已迁移</span></td><td>EP 优化专项 · ep.it 聚合（Copy of ARISE-1277）</td><td><span class="pri pri-p0">P0</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>Dev</td><td><span class="badge t">🔗 Tope 项目</span> 普通 Task（UC 无 Story 类型）；挂 UC-137；原票 Zhichen In Progress</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-382" target="_blank">UC-382</a> <span class="new-flag">✅ 已迁移</span></td><td>EP 优化专项 · ep.fr 聚合（Copy of ARISE-1279）</td><td><span class="pri pri-p0">P0</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>Dev</td><td><span class="badge t">🔗 Tope 项目</span> 普通 Task；挂 UC-137；原票 Zhichen In Progress</td></tr>
+      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-391" target="_blank">UC-391</a> <span class="new-flag">✅</span></td><td>City CSERP 1,085 旧 URL 内链更新 + sitemap 清理（Copy of ARISE-1278）</td><td><span class="pri pri-p0">P0</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>Dev</td><td>Xiaoyu；挂 UC-381；原票 To Do</td></tr>
+      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-392" target="_blank">UC-392</a> <span class="new-flag">✅</span></td><td>首页无关链接移除，替换为合格 B2B 链接（Copy of ARISE-1271）</td><td><span class="pri pri-p0">P0</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>Dev</td><td>Xiaoyu；挂 UC-381；原票 In Progress</td></tr>
+      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-393" target="_blank">UC-393</a> <span class="new-flag">✅</span></td><td>CPP Similar/Popular 推荐模块修复（Copy of ARISE-1275）</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>Dev</td><td>Yunyi；挂 UC-381；原票 To Do</td></tr>
+      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-394" target="_blank">UC-394</a> <span class="new-flag">✅</span></td><td>索引层覆盖分析 Indexation Coverage（Copy of ARISE-1277）</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>Dev</td><td>Tope；挂 UC-382；原票 In Progress</td></tr>
+      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-395" target="_blank">UC-395</a> <span class="new-flag">✅</span></td><td>新旧 CPP URL 去重合并（Copy of ARISE-1278）</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>Dev</td><td>Xiaoyu；挂 UC-382；原票 To Do</td></tr>
+      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-396" target="_blank">UC-396</a> <span class="new-flag">✅</span></td><td>Winner CPP 标题优化（地区+供应商搜索意图）（Copy of ARISE-1279）</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>Dev</td><td>Xiaoyu；挂 UC-382；原票 To Do</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-379" target="_blank">UC-379</a> <span class="new-flag">🎫 新建</span></td><td class="en">[SEO] Backlinks Phase 2: Merchant Program Execution</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>Self</td><td><b>直接执行外链二期</b>（10 商家项目，PRD+设计已 ready，解决商家招募门槛）；业务 PRD 阶段，未到排期</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-380" target="_blank">UC-380</a> <span class="new-flag">🎫 新建</span></td><td class="en">[SEO] Showroom New Hot Products Launch (X new/month + Y keyword dedup)</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>External</td><td>含商品质量（合格/精品/定向/新热）+ 180 万增量品评估（已合并于此）；业务 PRD 阶段，未到排期；与发品团队联评</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-406" target="_blank">UC-406</a> <span class="new-flag">🎫 补录</span></td><td>拓词来源质量提升（AB2 +0.5）</td><td><span class="pri pri-p0">P0</span></td><td><span class="status-tag st-ip">In Progress</span></td><td>Self</td><td>✅ 已建；漏斗表 CTR 列；@芷晨@大桔；8/18 盘点补录</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-407" target="_blank">UC-407</a> <span class="new-flag">🎫 补录</span></td><td>核心词改写（AB2 +0.5）</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-ip">In Progress</span></td><td>Self</td><td>✅ 已建；漏斗表 CTR 列；@芷晨@大桔；8/18 盘点补录</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-408" target="_blank">UC-408</a> <span class="new-flag">🎫 补录</span></td><td>多语言词库质量（AB2 +0.5）</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-ip">In Progress</span></td><td>Self</td><td>✅ 已建；漏斗表 CTR 列；@芷晨@大桔；8/18 盘点补录</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-409" target="_blank">UC-409</a> <span class="new-flag">🎫 补录</span></td><td>多语言词库映射</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-ip">In Progress</span></td><td>Self</td><td>✅ 已建；漏斗5月表 P1；@技术；8/18 盘点补录</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-410" target="_blank">UC-410</a> <span class="new-flag">🎫 补录</span></td><td>拓B类词/本本词（AB2 +1）</td><td><span class="pri pri-p0">P0</span></td><td><span class="status-tag st-ip">In Progress</span></td><td>Self</td><td>✅ 已建；漏斗表 UV-AB% 列；@芷晨@Tope；8/18 盘点补录</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-411" target="_blank">UC-411</a> <span class="new-flag">🎫 补录</span></td><td>新频道页、新工具页（AB2 +1）</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-ip">In Progress</span></td><td>Self</td><td>✅ 已建；漏斗表新渠道列；@晓宇@大桔；8/18 盘点补录</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-412" target="_blank">UC-412</a> <span class="new-flag">🎫 补录</span></td><td>新站点（AB2 +1）</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-ip">In Progress</span></td><td>Self</td><td>✅ 已建；漏斗表新渠道列；@Tope；8/18 盘点补录</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== Epic 3 ===== -->
+<div class="epic-card">
+  <div class="epic-header"><span class="epic-badge">Epic 3</span><a href="https://visable.atlassian.net/browse/UC-89" target="_blank" class="ticket-link"><span class="name">🖱 CTR &amp; On-Page 页面优化</span></a><span class="epic-badge" style="background:#bbf7d0;color:#166534">UC-89 ✅</span></div>
+  <table>
+    <thead><tr><th style="width:140px">Ticket</th><th style="width:300px">标题</th><th style="width:60px">优先级</th><th style="width:170px">Dependency Status</th><th style="width:70px">Dep Scope</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1063" target="_blank">ARISE-1063</a></td><td>TDH 文案分层优化</td><td><span class="pri pri-p0">P0</span></td><td><span class="status-tag st-sched">推全中</span></td><td>Dev</td><td>保持；覆盖 W32 CTR（TD 模板，+2115）</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-228" target="_blank">UC-228</a></td><td>CPP/PDP H1 改版</td><td><span class="pri pri-p0">P0</span></td><td><span class="status-tag st-sched">To Be Scheduled</span><span class="new-flag">✅ 已更新</span></td><td>Dev</td><td><span class="badge g">✅ 类型已修正（Epic→Task）</span> + 已挂 UC-89；已在开发</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-267" target="_blank">UC-267</a></td><td>CPP 有机→QDR 转化率分析（询盘漏斗）</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>Dev</td><td><span class="badge g">✅ 你确认归入 Epic 3</span>；CPP 32% UV 仅 17% AB（QDR 占 94%），与 ARISE-1252 分析联动</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-131" target="_blank">UC-131</a></td><td>SERP 改版（商卡+底部 longtext）＝商卡信息透传</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>Dev</td><td><span class="badge g">✅ 已确认</span> 即「商卡信息透传」（策略表 #12，+0.5）；保持</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1043" target="_blank">ARISE-1043</a></td><td>Detail 页改版（PDP&amp;CPP）</td><td><span class="pri pri-p0">P0</span></td><td><span class="status-tag st-sched">推全中</span></td><td>Dev</td><td>保持</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1252" target="_blank">ARISE-1252</a></td><td>Longtext 优化</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-backlog">待分析</span></td><td>Dev</td><td>保持；分析完成后评审再拆 Sub-ticket</td></tr>
+
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-413" target="_blank">UC-413</a> <span class="new-flag">🎫 补录</span></td><td>用户搜推相关性优化（UV-AB% +22%，AB2 +8）</td><td><span class="pri pri-p0">P0</span></td><td><span class="status-tag st-ip">In Progress</span></td><td>Self</td><td>✅ 已建；漏斗表最大增量项；@朱博@winnie@Ray；8/18 盘点补录</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-441" target="_blank">UC-441</a> <span class="new-flag">🎫 新建</span></td><td>用户询盘体验优化（UV-AB% +11%，AB2 +4）</td><td><span class="pri pri-p0">P0</span></td><td><span class="status-tag st-ip">In Progress（大部分已上线）</span></td><td>Dev</td><td>@utkarsha；UG Update 7月评论：UV→AB 体验举措几乎全部 live（除 QDR with AI）；PRD：<a href="https://visable.atlassian.net/wiki/pages/viewpage.action?pageId=63340704" target="_blank">QDR funnel</a> · <a href="https://visable.atlassian.net/wiki/pages/viewpage.action?pageId=63340728" target="_blank">RFQ form/funnel</a> · <a href="https://visable.atlassian.net/wiki/pages/viewpage.action?pageId=63340820" target="_blank">RFQ with AI</a> · <a href="https://visable.atlassian.net/wiki/pages/viewpage.action?pageId=296550416" target="_blank">QDR with AI</a></td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-442" target="_blank">UC-442</a> <span class="new-flag">🎫 新建</span></td><td>用户二回询盘体验优化（AB2 +6）</td><td><span class="pri pri-p0">P0</span></td><td><span class="status-tag st-ip">In Progress（部分已上线）</span></td><td>Dev</td><td>@utkarsha；部分 live 部分 in progress；PRD：<a href="https://visable.atlassian.net/wiki/pages/viewpage.action?pageId=63340593" target="_blank">Reminder Notification</a> · <a href="https://visable.atlassian.net/wiki/pages/viewpage.action?pageId=63340607" target="_blank">Message Center Experience</a> · <a href="https://visable.atlassian.net/wiki/pages/viewpage.action?pageId=63340781" target="_blank">Message Center with AI</a> · <a href="https://visable.atlassian.net/jira/polaris/projects/PCG/ideas/view/e86df0cd-b77f-4ea3-94e8-50ae38246577" target="_blank">PCG Polaris Roadmap</a></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== Epic 4 ===== -->
+<div class="epic-card">
+  <div class="epic-header"><span class="epic-badge">Epic 4</span><a href="https://visable.atlassian.net/browse/UC-377" target="_blank" class="ticket-link"><span class="name">🏭 PDP 增长计划（含 GMC &amp; 结构化）</span></a><span class="epic-badge" style="background:#bbf7d0;color:#166534">UC-377 ✅</span></div>
+  <table>
+    <thead><tr><th style="width:140px">Ticket</th><th style="width:300px">标题</th><th style="width:60px">优先级</th><th style="width:170px">Dependency Status</th><th style="width:70px">Dep Scope</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-383" target="_blank">UC-383</a> <span class="new-flag">🎫 新建</span></td><td class="en">[SEO] PDP P0: Double Eligible PDP Volume (3.5-score threshold, +52 AB)</td><td><span class="pri pri-p0">P0</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>External</td><td>wlw 41w / ep 增投 47w；若 P0-P2 一次评审全覆盖 → 合 1 票拆 4 Sub-ticket</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-384" target="_blank">UC-384</a> <span class="new-flag">🎫 新建</span></td><td class="en">[SEO] PDP P1: Quality Score to 4.5 (add text / dedupe / image alt)</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>External</td><td>17.6k→35k；图片 alt 由 SEO 团队负责</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-385" target="_blank">UC-385</a> <span class="new-flag">🎫 新建</span></td><td class="en">[SEO] PDP P2: Core Keyword SV into Scoring (DSV +10%)</td><td><span class="pri pri-p2">P2</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>External</td><td>关键词质量；业务 PRD 阶段，未到排期</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-386" target="_blank">UC-386</a> <span class="new-flag">🎫 新建</span></td><td class="en">[SEO] PDP P1: Structured Field Presentation (AB CVR +10%)</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>External</td><td>字段结构化呈现；业务 PRD 阶段，未到排期</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-387" target="_blank">UC-387</a> <span class="new-flag">🎫 新建</span></td><td class="en">[SEO] GMC Enablement: Upload Priced PDPs (Shopping Organic, +1 AB2)</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>External</td><td>策略表 #16；前置 UC-351/352/362；业务 PRD 阶段，未到排期；原「GMC 独立 Epic」已并入本 Epic</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-250" target="_blank">UC-250</a></td><td>PDP related products image url</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-sched">To Be Scheduled</span><span class="new-flag">✅ 已更新</span></td><td>Dev</td><td><span class="badge g">✅ 类型已修正（Epic→Task）</span> + 已挂 UC-377；开发中</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-127" target="_blank">UC-127</a></td><td>结构化数据（SEMrush review）</td><td><span class="pri pri-p2">P2</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>Dev</td><td>保持；关联到本 Epic</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== Epic 5 ===== -->
+<div class="epic-card">
+  <div class="epic-header"><span class="epic-badge">Epic 5</span><a href="https://visable.atlassian.net/browse/UC-179" target="_blank" class="ticket-link"><span class="name">🛡 Defense 防守</span></a><span class="epic-badge" style="background:#bbf7d0;color:#166534">UC-179 ✅</span></div>
+  <table>
+    <thead><tr><th style="width:140px">Ticket</th><th style="width:300px">标题</th><th style="width:60px">优先级</th><th style="width:170px">Dependency Status</th><th style="width:70px">Dep Scope</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1173" target="_blank">ARISE-1173</a></td><td>前端性能优化 S1</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-done">5/7 已上线</span></td><td>Dev</td><td>保持</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-388" target="_blank">UC-388</a> <span class="new-flag">🎫 新建</span></td><td class="en">[SEO] Botify Purchase Evaluation (≤$35k, budget request by end of Sep)</td><td><span class="pri pri-p0">P0</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>Self</td><td>9 月底 DDL；AB2 +2；当前调研阶段</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-389" target="_blank">UC-389</a> <span class="new-flag">🎫 新建</span></td><td class="en">[SEO] wap2app Channel Goal Split</td><td><span class="pri pri-p2">P2</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>Self</td><td>业务在 align 目标（依赖牧可）；非开发 ticket，未到排期</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-414" target="_blank">UC-414</a> <span class="new-flag">🎫 补录</span></td><td>url 优化</td><td><span class="pri pri-p2">P2</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>Self</td><td>✅ 已建；主要是要审查一下还有没有url问题；8/18 盘点补录</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== Epic 6 ===== -->
+<div class="epic-card">
+  <div class="epic-header"><span class="epic-badge">Epic 6</span><a href="https://visable.atlassian.net/browse/UC-132" target="_blank" class="ticket-link"><span class="name">🔬 SEO 数据与 Agent 建设</span></a><span class="epic-badge" style="background:#bbf7d0;color:#166534">UC-132 ✅ 改名复用</span></div>
+  <table>
+    <thead><tr><th style="width:140px">Ticket</th><th style="width:300px">标题</th><th style="width:60px">优先级</th><th style="width:170px">Dependency Status</th><th style="width:70px">Dep Scope</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UPR-43" target="_blank">UPR-43</a></td><td>A1 - Traffic Attribution Analysis Agent（流量归因分析）</td><td><span class="pri pri-p2">P2</span></td><td><span class="status-tag st-closed">Closed</span></td><td>Dev</td><td><span class="badge t">🔗 UC-132 已挂</span>（Relates）；UPR 侧管理，保持</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UPR-44" target="_blank">UPR-44</a></td><td>A2 - Keyword Discovery &amp; Page Generation Agent（关键词发现&amp;页面生成）</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-dev">In Delivery</span></td><td>Dev</td><td><span class="badge t">🔗 UC-132 已挂</span>（Relates）；UPR 侧管理，保持</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UPR-45" target="_blank">UPR-45</a></td><td>A3 - Content Optimization Agent（内容优化）</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-dev">In Delivery</span></td><td>Dev</td><td><span class="badge t">🔗 UC-132 已挂</span>（Relates）；UPR 侧管理，保持</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UPR-46" target="_blank">UPR-46</a></td><td>A4 - Defensive SEO Agent（防御）</td><td><span class="pri pri-p2">P2</span></td><td><span class="status-tag st-closed">Closed</span></td><td>Dev</td><td><span class="badge t">🔗 UC-132 已挂</span>（Relates）；UPR 侧管理，保持</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/DAN-785" target="_blank">DAN-785</a></td><td>SEO AB 周报数据异常（7/10 无法归因）</td><td><span class="pri pri-p0">P0</span></td><td><span class="status-tag st-watch">🔴 需跟</span></td><td>Dev</td><td>数据侧工单，关联挂到本 Epic（原在技术 SEO Epic）</td></tr>
+      <tr><td class="mono">ARISE-1265~1273</td><td>UV&amp;AB 监控体系（全链路）+ 1276（APP）+ 1295（服务端）</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-closed">已完成/Backlog</span></td><td>Dev</td><td>全部关联到本 Epic</td></tr>
+      <tr><td class="mono">ARISE-1189/1099/1108/1192 等</td><td>SEO Agent 巡检/修复（30 条）</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-closed">已完成/进行中</span></td><td>Dev</td><td>全部关联到本 Epic</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-29" target="_blank">UC-29</a></td><td>Spam Agent Workflow</td><td><span class="pri pri-p2">P2</span></td><td><span class="status-tag st-done">Completed</span></td><td>Dev</td><td>关联到本 Epic</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-390" target="_blank">UC-390</a> <span class="new-flag">🎫 新建</span></td><td class="en">[SEO] AB &amp; AB2 Analysis Agent</td><td><span class="pri pri-p1">P1</span></td><td><span class="status-tag st-sched">To Be Scheduled</span></td><td>Dev</td><td>新增需求：SEO AB 和 AB2 分析 agent</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== Epic 7 ===== -->
+<div class="epic-card">
+  <div class="epic-header"><span class="epic-badge">Epic 7</span><a href="https://visable.atlassian.net/browse/UC-214" target="_blank" class="ticket-link"><span class="name">⚖️ 合规 · 风控</span></a><span class="epic-badge" style="background:#bbf7d0;color:#166534">UC-214 ✅ 改名复用</span></div>
+  <table>
+    <thead><tr><th style="width:140px">Ticket</th><th style="width:300px">标题</th><th style="width:60px">优先级</th><th style="width:170px">Dependency Status</th><th style="width:70px">Dep Scope</th><th>说明</th></tr></thead>
+    <tbody>
+
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== 汇总 ===== -->
+<h2 class="section-title">📋 待办汇总</h2>
+<div class="summary-grid">
+  <div class="summary-card"><div class="num" style="color:var(--green)">7</div><div class="lbl">🏗 建 Epic（5 改名复用 + 2 新建）✅</div></div>
+  <div class="summary-card"><div class="num" style="color:var(--green)">2</div><div class="lbl">🔧 类型修正（UC-227/250）✅</div></div>
+  <div class="summary-card"><div class="num" style="color:var(--green)">76</div><div class="lbl">🔗 关联工单（62 Agent 群 + 14 固定）✅</div></div>
+  <div class="summary-card"><div class="num" style="color:var(--green)">34</div><div class="lbl">🎫 新建 Ticket（含 Tope 迁移 8）✅</div></div>
+  <div class="summary-card"><div class="num" style="color:var(--green)">5</div><div class="lbl">🔄 状态更新（7 票 → To Do）✅</div></div>
+  <div class="summary-card"><div class="num">6</div><div class="lbl">✅ 已覆盖不新建</div></div>
+  <div class="summary-card"><div class="num" style="color:var(--amber)">12</div><div class="lbl">📋 盘点补录（已建 10：8 In Progress + 1 Triage + 1 还没开始 + Utkarsha 进行中 ×2 未建）</div></div>
+  <div class="summary-card"><div class="num" style="color:var(--red)">12</div><div class="lbl">📊 P0 高优（进行中/异常/DDL）</div></div>
+</div>
+
+<div class="foot-note">
+  📌 附：UC-250（已修正为 Task）、UC-89（TDH and Longtext）已在开发，状态已更新为<b>排期中</b>；<b>8/18 动工已全部完成</b>（7 Epic 就位 / 34 新建 / 76 关联 / 7 票状态更新）。<br>📋 <b>盘点补录 12 项</b>（8/18 漏斗表盘点，删 2 项）：拓词质量×3 + 多语言词库映射 + 拓B类词 + 新频道/工具页 + 新站点 + 搜推相关性（+8）+ 询盘体验×2（+4/+6）+ url优化 + AI可爬性，合计 AB2 +22.5；❌ 已删：页面主体相关性丰富度（ARISE-1043 已覆盖，Artur 离职）、站内体验（无对应项目）；⚠️ sitemap 已由 ARISE-1251/1238 覆盖、蚕食聚簇已由 ARISE-1248 覆盖，不重复建。<b>✅ 已建 UC-406~415</b>：8 项 In Progress（未出 PRD，业务侧推进，Scope=Self）+ <b>url 优化 P2 Triage</b>（Scope=Self）+ <b>AI 可爬性（P2）还没开始</b>；Utkarsha 2 项进行中（已出 PRD，Scope=Dev；询盘体验大部分已上线、二回询盘部分上线，PRD 链接已挂行内，PRODTECH 侧管理）。
+</div>
+
+<footer>2026-08-18 · SEO Jira Ticket 总表 · Dependency Status = 更新后应有状态，🔄 表示需动手更新</footer>
+</div>
+</body>
+</html>
