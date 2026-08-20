@@ -90,10 +90,6 @@
 
 | Ticket | 标题 | 优先级 | Reporter | Assignee | Dependency Status | Dependency Scope | 说明 |
 |--------|------|--------|----------|----------|---------------|---------|------|
-| UPR-43 | A1 - Traffic Attribution Analysis Agent（流量归因分析） | P2 | Xiaoyu Dou | - | Closed | Dev | UC-132 已挂（Relates）；UPR 侧管理，保持 |
-| UPR-44 | A2 - Keyword Discovery & Page Generation Agent（关键词发现&页面生成） | P1 | Xiaoyu Dou | - | In Delivery | Dev | UC-132 已挂（Relates）；UPR 侧管理，保持 |
-| UPR-45 | A3 - Content Optimization Agent（内容优化） | P1 | Xiaoyu Dou | - | In Delivery | Dev | UC-132 已挂（Relates）；UPR 侧管理，保持 |
-| UPR-46 | A4 - Defensive SEO Agent（防御） | P2 | Xiaoyu Dou | - | Closed | Dev | UC-132 已挂（Relates）；UPR 侧管理，保持 |
 | DAN-785 | SEO AB 周报数据异常（7/10 无法归因） | P0 | Muke Zhang | Olga Hincu | 🔴 需跟 | Dev | 数据侧工单，关联挂到本 Epic（原在技术 SEO Epic） |
 | ARISE-1265~1273 | UV&AB 监控体系（全链路）+ 1276（APP）+ 1295（服务端） | P1 | Xiaoyu Dou | Xiaoyu Dou | 已完成/Backlog | Dev | 全部关联到本 Epic |
 | ARISE-1189/1099/1108/1192 等 | SEO Agent 巡检/修复（30 条） | P1 | Xiaoyu Dou | Xiaoyu Dou | 已完成/进行中 | Dev | 全部关联到本 Epic |
