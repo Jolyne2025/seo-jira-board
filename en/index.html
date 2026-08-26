@@ -17,7 +17,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   background: var(--bg); color: var(--ink); line-height: 1.6; padding: 28px 16px 60px;
 }
-.wrap { max-width: 1280px; margin: 0 auto; }
+.wrap { max-width: 1280px; margin: 0 auto; margin-left: 240px; }
+@media (max-width: 1024px) { .wrap { margin-left: auto; } }
 header {
   background: linear-gradient(135deg, #1e3a8a, #2563eb); border-radius: 14px;
   padding: 24px 32px; color: #fff; margin-bottom: 22px; box-shadow: 0 6px 20px rgba(37,99,235,.25);
@@ -78,16 +79,24 @@ h2.section-title { font-size: 17px; font-weight: 700; margin: 28px 0 14px; paddi
 footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 24px; }
 @media (max-width: 760px) { table { font-size: 12px; } td, th { padding: 5px 8px; } }
 
-/* TOC */
-.toc { position: fixed; left: 0; top: 0; bottom: 0; width: 210px; z-index: 100; background: var(--card); border-right: 1px solid var(--line); padding: 50px 12px 20px; overflow-y: auto; transform: translateX(-120%); transition: transform .22s ease; }
-.toc.open { transform: none; box-shadow: 0 10px 36px rgba(0,0,0,.22); }
+/* TOC - visible on desktop, slide-in on mobile */
+.toc { position: fixed; left: 16px; top: 16px; bottom: 16px; width: 210px; z-index: 100; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 50px 12px 20px; overflow-y: auto; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
 .toc-title { font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 8px; padding-left: 4px; }
 .toc a { display: block; padding: 4px 8px; margin: 1px 0; border-radius: 6px; font-size: 12.5px; color: var(--muted); text-decoration: none; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; line-height: 1.4; }
 .toc a:hover { background: #f1f5f9; color: var(--blue); }
 .toc a.active { background: var(--blue-bg); color: var(--blue); font-weight: 600; }
 .toc a .tk { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: var(--muted); margin-left: 4px; }
 .toc-toggle { display: none; position: fixed; left: 14px; top: 14px; z-index: 110; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 6px 12px; cursor: pointer; font-size: 18px; box-shadow: 0 2px 8px rgba(0,0,0,.10); }
-@media (max-width: 760px) { .toc { width: 82vw; } .toc-toggle { display: flex; } }
+@media (max-width: 1024px) {
+  .toc { left: 0; transform: translateX(-120%); transition: transform .22s ease; border-radius: 0; border: none; border-right: 1px solid var(--line); }
+  .toc.open { transform: none; box-shadow: 0 10px 36px rgba(0,0,0,.22); }
+  .toc-toggle { display: flex; }
+}
+@media (max-width: 760px) { .toc { width: 82vw; } }
+
+/* Algo badges */
+.badge.gray { background: #e5e7eb; color: #374151; padding: 2px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.badge.b { background: #dbeafe; color: #1d4ed8; padding: 2px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; white-space: nowrap; }
 
 </style>
 </head>
@@ -127,6 +136,21 @@ footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 2
   </div>
   <div class="goal-desc">SEO FY27 Goal: D-AB2 43 → 180 (4.2x); FY27 Q4 Target: D-UV 71,251 / D-AB 373 / UV→AB 0.5% / AB→AB2 48.3%</div>
 </div>
+
+<!-- Google Algorithm Updates -->
+<div class="epic-card">
+  <div class="epic-header"><span class="epic-badge">Algo</span><span class="name">🔍 Google Algorithm Update Tracking (Apr 2026 - Present)</span><span class="epic-badge" style="background:#dbeafe;color:#1d4ed8">Last check 2026-08-26</span><span class="epic-badge" style="background:#fef3c7;color:#92400e">🕐 Weekly auto-review</span></div>
+  <table>
+    <thead><tr><th style="width:190px">Update</th><th style="width:110px">Period</th><th style="width:96px">Type</th><th>Key Points</th><th style="width:100px">Status</th></tr></thead>
+    <tbody>
+      <tr><td class="mono"><a class="ticket-link" href="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history" target="_blank">August 2026 Spam Update</a></td><td class="mono">8.18 - 8.21</td><td><span class="badge gray">Spam Update</span></td><td>3rd spam update of 2026; announced 8/18 09:27 PDT, all languages/regions globally; completed 8/21 (2d 16h); continues anti-scaled AI bulk content theme</td><td><span class="status-tag st-done">Done</span></td></tr>
+      <tr><td class="mono">June 2026 Spam Update</td><td class="mono">6.24 - 6.26</td><td><span class="badge gray">Spam Update</span></td><td>Completed in ~2 days; no new policy or named targets; SpamBrain routine upgrade; anti-scaled zero-value AI bulk content</td><td><span class="status-tag st-done">Done</span></td></tr>
+      <tr><td class="mono">May 2026 Core Update</td><td class="mono">5.21 - 6.2</td><td><span class="badge b">Core Update</span></td><td>2nd broad core update (6 wks after March); post-I/O 2026: AI Mode to Gemini 3.5 Flash, algorithm curates trusted citations (SAGE: AI agent reads only top 3 SERP); volatility > March; AI junk/thin content under pressure</td><td><span class="status-tag st-done">Done</span></td></tr>
+      <tr><td class="mono">March 2026 Core Update</td><td class="mono">3.27 - 4.8</td><td><span class="badge b">Core Update</span></td><td>1st broad core update (completed 4/8, impacted Apr baseline); 55%+ site volatility (Googlequake); AI content farms -60~80%, affiliates negative impact 71%; information gain mandatory (Gemini semantic filter); granular E-E-A-T; original data sites +22% visibility</td><td><span class="status-tag st-done">Done</span></td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="foot-note" style="margin-bottom:16px">📌 Tracking Google Search Status Dashboard &amp; community reports; append when new updates roll out.</div>
 
 <!-- Epic 1 -->
 <div class="epic-card">
