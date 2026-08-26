@@ -5,124 +5,105 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SEO Project Master Table</title>
 <style>
-  :root {
-    --bg: #f5f6fa; --card: #fff; --ink: #1f2430; --muted: #6b7280; --line: #e5e7eb;
-    --blue: #2563eb; --blue-bg: #eff6ff; --green: #16a34a; --green-bg: #f0fdf4;
-    --red: #dc2626; --red-bg: #fef2f2; --amber: #d97706; --amber-bg: #fffbeb;
-    --purple: #7c3aed; --purple-bg: #f5f3ff; --teal: #0d9488; --teal-bg: #f0fdfa;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-    background: var(--bg); color: var(--ink); line-height: 1.6; padding: 28px 16px 60px;
-  }
-  .wrap { max-width: 1280px; margin: 0 auto; }
-  header {
-    background: linear-gradient(135deg, #1e3a8a, #2563eb); border-radius: 14px;
-    padding: 24px 32px; color: #fff; margin-bottom: 22px; box-shadow: 0 6px 20px rgba(37,99,235,.25);
-  }
-  header h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
-  header .meta { font-size: 13px; opacity: .88; }
-  header .badges { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
-  .badge {
-    display: inline-block; padding: 2px 10px; border-radius: 999px;
-    font-size: 11px; font-weight: 600; white-space: nowrap;
-  }
-  .badge.light { background: rgba(255,255,255,.16); color: #fff; }
-  .badge.b { background: var(--blue-bg); color: var(--blue); border: 1px solid #bfdbfe; }
-  .badge.g { background: var(--green-bg); color: var(--green); border: 1px solid #bbf7d0; }
-  .badge.r { background: var(--red-bg); color: var(--red); border: 1px solid #fecaca; }
-  .badge.a { background: var(--amber-bg); color: var(--amber); border: 1px solid #fde68a; }
-  .badge.p { background: var(--purple-bg); color: var(--purple); border: 1px solid #ddd6fe; }
-  .badge.t { background: var(--teal-bg); color: var(--teal); border: 1px solid #99f6e4; }
-  .badge.gray { background: #f3f4f6; color: #4b5563; border: 1px solid #e5e7eb; }
 
-  .epic-card {
-    background: var(--card); border: 1px solid var(--line);
-    border-radius: 12px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,.04);
-    overflow: hidden;
-  }
-  .epic-header {
-    background: #f8fafc; padding: 13px 20px; border-bottom: 1px solid var(--line);
-    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-  }
-  .epic-header .name { font-size: 15.5px; font-weight: 700; color: var(--blue); }
-  .epic-header .epic-badge { font-size: 11px; background: #dbeafe; color: #1d4ed8; border-radius: 6px; padding: 2px 8px; }
+:root {
+  --bg: #f5f6fa; --card: #fff; --ink: #1f2430; --muted: #6b7280; --line: #e5e7eb;
+  --blue: #2563eb; --blue-bg: #eff6ff; --green: #16a34a; --green-bg: #f0fdf4;
+  --red: #dc2626; --red-bg: #fef2f2; --amber: #d97706; --amber-bg: #fffbeb;
+  --purple: #7c3aed; --purple-bg: #f5f3ff; --teal: #0d9488; --teal-bg: #f0fdfa;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: var(--bg); color: var(--ink); line-height: 1.6; padding: 28px 16px 60px;
+}
+.wrap { max-width: 1280px; margin: 0 auto; }
+header {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb); border-radius: 14px;
+  padding: 24px 32px; color: #fff; margin-bottom: 22px; box-shadow: 0 6px 20px rgba(37,99,235,.25);
+}
+header h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+header .meta { font-size: 13px; opacity: .88; }
+header .badges { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+.badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.badge.light { background: rgba(255,255,255,.16); color: #fff; }
 
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  thead th {
-    background: #f1f5f9; color: #475569; font-weight: 600;
-    padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--line);
-    font-size: 12px; white-space: nowrap;
-  }
-  tbody td { padding: 7px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
-  tbody tr:hover { background: #fafbfe; }
-  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
-  .ticket-link { color: var(--blue); text-decoration: none; font-weight: 500; }
-  .ticket-link:hover { text-decoration: underline; }
-  .en { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; color: #1d4ed8; }
-  .sub { border-left: 3px solid #93c5fd; margin-left: 8px; }
+.epic-card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,.04); overflow: hidden; }
+.epic-header { background: #f8fafc; padding: 13px 20px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; cursor: pointer; user-select: none; }
+.epic-header .name { font-size: 15.5px; font-weight: 700; color: var(--blue); }
+.epic-header .epic-badge { font-size: 11px; background: #dbeafe; color: #1d4ed8; border-radius: 6px; padding: 2px 8px; }
+.fold-arrow { color: #94a3b8; display: inline-block; transition: transform .15s ease; font-size: 14px; }
+.fold-arrow.collapsed { transform: rotate(-90deg); }
+.sub-toggle { font-size: 11px; background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; border-radius: 6px; padding: 2px 10px; cursor: pointer; margin-left: auto; }
+.sub-toggle:hover { background: #bae6fd; }
 
-  .goal-card {
-    background: var(--card); border: 1px solid var(--line);
-    border-left: 4px solid var(--blue); border-radius: 12px;
-    margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,.04);
-    padding: 14px 20px;
-  }
-  .goal-header { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .goal-header .goal-badge { font-size: 12px; background: #dbeafe; color: #1d4ed8; border-radius: 6px; padding: 2px 10px; }
-  .goal-header .goal-name { font-size: 15.5px; font-weight: 700; color: var(--ink); }
-  .goal-desc { font-size: 13px; color: var(--muted); margin-top: 6px; padding-left: 4px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead th { background: #f1f5f9; color: #475569; font-weight: 600; padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--line); font-size: 12px; white-space: nowrap; }
+tbody td { padding: 7px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+tbody tr:hover { background: #fafbfe; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+.ticket-link { color: var(--blue); text-decoration: none; font-weight: 500; }
+.ticket-link:hover { text-decoration: underline; }
+.sub { border-left: 3px solid #93c5fd; }
 
-  .summary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; margin: 16px 0; }
-  .summary-card {
-    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
-    padding: 12px 16px; text-align: center;
-  }
-  .summary-card .num { font-size: 22px; font-weight: 700; color: var(--blue); }
-  .summary-card .lbl { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.goal-card { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--blue); border-radius: 12px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,.04); padding: 14px 20px; }
+.goal-header { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.goal-header .goal-badge { font-size: 12px; background: #dbeafe; color: #1d4ed8; border-radius: 6px; padding: 2px 10px; }
+.goal-header .goal-name { font-size: 15.5px; font-weight: 700; color: var(--ink); }
+.goal-desc { font-size: 13px; color: var(--muted); margin-top: 6px; padding-left: 4px; }
 
-  .rule-box {
-    border-left: 4px solid var(--amber); background: var(--amber-bg);
-    padding: 12px 18px; border-radius: 0 10px 10px 0; margin: 18px 0;
-    font-size: 13.5px;
-  }
-  .rule-box code {
-    background: #fef3c7; padding: 1px 6px; border-radius: 4px;
-    font-family: ui-monospace, monospace; font-size: 12.5px;
-  }
-  h2.section-title {
-    font-size: 17px; font-weight: 700; margin: 28px 0 14px;
-    padding-left: 10px; border-left: 4px solid var(--blue);
-  }
-  .status-tag { display: inline-block; padding: 1px 8px; border-radius: 6px; font-size: 11.5px; font-weight: 600; }
-  .st-sched { background: var(--amber-bg); color: var(--amber); border: 1px solid #fde68a; }
-  .st-dev { background: var(--blue-bg); color: var(--blue); border: 1px solid #bfdbfe; }
-  .st-done { background: var(--green-bg); color: var(--green); border: 1px solid #bbf7d0; }
-  .st-closed { background: #f3f4f6; color: #4b5563; border: 1px solid #e5e7eb; }
-  .st-backlog { background: var(--purple-bg); color: var(--purple); border: 1px solid #ddd6fe; }
-  .st-watch { background: var(--red-bg); color: var(--red); border: 1px solid #fecaca; }
-  .st-new { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
-  .st-pending { background: #f0fdf4; color: #16a34a; border: 1px dashed #86efac; }
-  .st-ip { background: var(--teal-bg); color: var(--teal); border: 1px solid #99f6e4; }
-  .st-prd { background: var(--purple-bg); color: var(--purple); border: 1px solid #ddd6fe; }
-  .st-triage { background: var(--amber-bg); color: var(--amber); border: 1px solid #fde68a; }
-  .pri { display: inline-block; padding: 1px 9px; border-radius: 6px; font-size: 11px; font-weight: 700; }
-  .pri-p0 { background: var(--red-bg); color: var(--red); border: 1px solid #fecaca; }
-  .pri-p1 { background: var(--amber-bg); color: var(--amber); border: 1px solid #fde68a; }
-  .pri-p2 { background: #f3f4f6; color: #64748b; border: 1px solid #e5e7eb; }
-  .foot-note { font-size: 12.5px; color: var(--muted); background: var(--card); border: 1px dashed var(--line); border-radius: 10px; padding: 10px 16px; margin-top: 14px; }
-  footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 24px; }
-  @media (max-width: 760px) { table { font-size: 12px; } td, th { padding: 5px 8px; } }
+.summary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; margin: 16px 0; }
+.summary-card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; text-align: center; }
+.summary-card .num { font-size: 22px; font-weight: 700; color: var(--blue); }
+.summary-card .lbl { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+.rule-box { border-left: 4px solid var(--amber); background: var(--amber-bg); padding: 12px 18px; border-radius: 0 10px 10px 0; margin: 18px 0; font-size: 13.5px; }
+h2.section-title { font-size: 17px; font-weight: 700; margin: 28px 0 14px; padding-left: 10px; border-left: 4px solid var(--blue); }
+
+.status-tag { display: inline-block; padding: 1px 8px; border-radius: 6px; font-size: 11.5px; font-weight: 600; }
+.st-sched { background: var(--amber-bg); color: var(--amber); border: 1px solid #fde68a; }
+.st-done { background: var(--green-bg); color: var(--green); border: 1px solid #bbf7d0; }
+.st-closed { background: #f3f4f6; color: #4b5563; border: 1px solid #e5e7eb; }
+.st-backlog { background: var(--purple-bg); color: var(--purple); border: 1px solid #ddd6fe; }
+.st-watch { background: var(--red-bg); color: var(--red); border: 1px solid #fecaca; }
+.st-new { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+.st-ip { background: var(--teal-bg); color: var(--teal); border: 1px solid #99f6e4; }
+.st-triage { background: var(--amber-bg); color: var(--amber); border: 1px solid #fde68a; }
+.st-prd { background: var(--purple-bg); color: var(--purple); border: 1px solid #ddd6fe; }
+.pri { display: inline-block; padding: 1px 9px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+.pri-p0 { background: var(--red-bg); color: var(--red); border: 1px solid #fecaca; }
+.pri-p1 { background: var(--amber-bg); color: var(--amber); border: 1px solid #fde68a; }
+.pri-p2 { background: #f3f4f6; color: #64748b; border: 1px solid #e5e7eb; }
+.foot-note { font-size: 12.5px; color: var(--muted); background: var(--card); border: 1px dashed var(--line); border-radius: 10px; padding: 10px 16px; margin-top: 14px; }
+footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 24px; }
+@media (max-width: 760px) { table { font-size: 12px; } td, th { padding: 5px 8px; } }
+
+/* TOC */
+.toc { position: fixed; left: 0; top: 0; bottom: 0; width: 210px; z-index: 100; background: var(--card); border-right: 1px solid var(--line); padding: 50px 12px 20px; overflow-y: auto; transform: translateX(-120%); transition: transform .22s ease; }
+.toc.open { transform: none; box-shadow: 0 10px 36px rgba(0,0,0,.22); }
+.toc-title { font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 8px; padding-left: 4px; }
+.toc a { display: block; padding: 4px 8px; margin: 1px 0; border-radius: 6px; font-size: 12.5px; color: var(--muted); text-decoration: none; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; line-height: 1.4; }
+.toc a:hover { background: #f1f5f9; color: var(--blue); }
+.toc a.active { background: var(--blue-bg); color: var(--blue); font-weight: 600; }
+.toc a .tk { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: var(--muted); margin-left: 4px; }
+.toc-toggle { display: none; position: fixed; left: 14px; top: 14px; z-index: 110; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 6px 12px; cursor: pointer; font-size: 18px; box-shadow: 0 2px 8px rgba(0,0,0,.10); }
+@media (max-width: 760px) { .toc { width: 82vw; } .toc-toggle { display: flex; } }
 
 </style>
 </head>
 <body>
+
+<nav class="toc" id="toc" aria-label="Table of Contents">
+  <div class="toc-title">📑 Contents</div>
+  <div id="tocBody"></div>
+</nav>
+<button class="toc-toggle" id="tocToggle" type="button" aria-label="Toggle TOC">☰</button>
+
 <div class="wrap">
 
 <header>
   <div class="external-banner" style="background:linear-gradient(135deg,#f0f9ff,#eef2ff);border:1px solid #bae6fd;border-radius:12px;padding:12px 16px;margin-bottom:14px;font-size:13px;color:#0369a1;">📋 <b>SEO Project Master Table · External</b> · 2026-08-26 · Click Ticket # to open Jira</div>
-<h1>SEO Project Master Table</h1>
+  <h1>SEO Project Master Table</h1>
   <div class="meta">2026-08-26 ｜ 7 Epics · 61 Tickets</div>
   <div class="badges">
     <span class="badge light">🎯 FY27 Goal UC-105</span>
@@ -133,11 +114,11 @@
 <div class="rule-box">
   <strong>Legend</strong><br>
   ① Hierarchy: Epic → Ticket (Subtasks as needed)<br>
-  ② Priority: <b style="color:var(--red)">P0</b> In-progress / High Impact (Dev, Rollout, Anomaly, DDL near) ｜ <b style="color:var(--amber)">P1</b> To-be-scheduled / Important ｜ <b style="color:var(--muted)">P2</b> To-be-researched<br>
+  ② Priority: <b style="color:var(--red)">P0</b> In-progress / High Impact (Dev, Rollout, Anomaly, DDL) ｜ <b style="color:var(--amber)">P1</b> To Schedule / Important ｜ <b style="color:var(--muted)">P2</b> To Research<br>
   ③ Dep Scope: <b>PM</b> = Self-driven by Business ｜ <b>Dev</b> = Pending Dev Resources ｜ <b>External</b> = External Team Dependency
 </div>
 
-<!-- ===== FY27 业务目标 ===== -->
+<!-- FY27 Goal -->
 <div class="goal-card">
   <div class="goal-header">
     <span class="goal-badge">🎯 Business Goal</span>
@@ -147,124 +128,124 @@
   <div class="goal-desc">SEO FY27 Goal: D-AB2 43 → 180 (4.2x); FY27 Q4 Target: D-UV 71,251 / D-AB 373 / UV→AB 0.5% / AB→AB2 48.3%</div>
 </div>
 
-<!-- ===== Epic 1 ===== -->
+<!-- Epic 1 -->
 <div class="epic-card">
-  <div class="epic-header"><span class="epic-badge">Epic 1</span><a href="https://visable.atlassian.net/browse/UC-376" target="_blank" class="ticket-link"><span class="name">🥗 Diet: URL Reduction & Index Cleanup</span></a><span class="epic-badge" style="background:#bbf7d0;color:#166534">UC-376</span></div>
+  <div class="epic-header"><span class="fold-arrow">&#9660;</span><span class="epic-badge">Epic 1</span><a href="https://visable.atlassian.net/browse/UC-376" target="_blank" class="ticket-link"><span class="name">🥗 Diet: URL Reduction & Index Cleanup</span></a><span class="epic-badge" style="background:#bbf7d0;color:#166534">UC-376</span></div>
   <table>
     <thead><tr><th style="width:140px">Ticket</th><th style="width:300px">Title</th><th style="width:60px">Pri</th><th style="width:90px">Reporter</th><th style="width:90px">Assignee</th><th style="width:170px">Status</th><th style="width:70px">Dep Scope</th><th>Notes</th></tr></thead>
     <tbody>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1112" target="_blank">ARISE-1112</a></td><td>Phase 1 - Reduce filter (remove internal links + sitemap)</td><td><span class="pri pri-p0">P0</span></td><td>Xiaoyu Dou</td><td>Zhichen Bi</td><td><span class="status-tag">灰度中</span></td><td>Dev</td><td>保持；上线后 → Done</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1251" target="_blank">ARISE-1251</a></td><td>Remove low-efficiency SERP URLs</td><td><span class="pri pri-p1">P1</span></td><td>Xiaoyu Dou</td><td>Zhichen Bi</td><td><span class="status-tag">Closed</span></td><td>Dev</td><td>保持；同时覆盖 W32 索引膨胀（CSERP 部分）</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-277" target="_blank">UC-277</a></td><td>Remove low-quality CPP URLs</td><td><span class="pri pri-p0">P0</span></td><td>Jolyne Zhang</td><td>Xiaoyu Dou</td><td><span class="status-tag">Done</span></td><td>Dev</td><td>保持</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1248" target="_blank">ARISE-1248</a></td><td>De-list junk keywords with impressions (301)</td><td><span class="pri pri-p1">P1</span></td><td>Zhichen Bi</td><td>-</td><td><span class="status-tag">Closed</span></td><td>Dev</td><td>保持；覆盖 W32 蚕食治理（301 部分）</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1253" target="_blank">ARISE-1253</a></td><td>Phase 2 - Filter: strong-signal canonical</td><td><span class="pri pri-p1">P1</span></td><td>Xiaoyu Dou</td><td>Zhichen Bi</td><td><span class="status-tag">待排期</span></td><td>Dev</td><td>保持</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1254" target="_blank">ARISE-1254</a></td><td>Phase 2 - Reduce pagination</td><td><span class="pri pri-p2">P2</span></td><td>Xiaoyu Dou</td><td>-</td><td><span class="status-tag">待排期</span></td><td>Dev</td><td>保持</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1112" target="_blank">ARISE-1112</a></td><td>Phase 1 - Reduce filter (remove internal links + sitemap)</td><td><span class="pri pri-p0">P0</span></td><td>Xiaoyu Dou</td><td>Zhichen Bi</td><td><span class="status-tag">Rollout</span></td><td>Dev</td><td>Keep</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1251" target="_blank">ARISE-1251</a></td><td>Remove low-efficiency SERP URLs</td><td><span class="pri pri-p1">P1</span></td><td>Xiaoyu Dou</td><td>Zhichen Bi</td><td><span class="status-tag">Closed</span></td><td>Dev</td><td>Keep; also covers W32 index inflation (CSERP part)</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-277" target="_blank">UC-277</a></td><td>Remove low-quality CPP URLs</td><td><span class="pri pri-p0">P0</span></td><td>Jolyne Zhang</td><td>Xiaoyu Dou</td><td><span class="status-tag">Done</span></td><td>Dev</td><td>Keep</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1248" target="_blank">ARISE-1248</a></td><td>De-list junk keywords with impressions (301)</td><td><span class="pri pri-p1">P1</span></td><td>Zhichen Bi</td><td>-</td><td><span class="status-tag">Closed</span></td><td>Dev</td><td>Keep; covers W32 cannibalization fix (301 part)</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1253" target="_blank">ARISE-1253</a></td><td>Phase 2 - Filter: strong-signal canonical</td><td><span class="pri pri-p1">P1</span></td><td>Xiaoyu Dou</td><td>Zhichen Bi</td><td><span class="status-tag">To Schedule</span></td><td>Dev</td><td>Keep</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1254" target="_blank">ARISE-1254</a></td><td>Phase 2 - Reduce pagination</td><td><span class="pri pri-p2">P2</span></td><td>Xiaoyu Dou</td><td>-</td><td><span class="status-tag">To Schedule</span></td><td>Dev</td><td>Keep</td></tr>
     </tbody>
   </table>
 </div>
-<!-- ===== Epic 2 ===== -->
+<!-- Epic 2 -->
 <div class="epic-card">
-  <div class="epic-header"><span class="epic-badge">Epic 2</span><a href="https://visable.atlassian.net/browse/UC-137" target="_blank" class="ticket-link"><span class="name">📈 Growth: Keyword Expansion</span></a><span class="epic-badge" style="background:#bbf7d0;color:#166534">UC-137</span></div>
+  <div class="epic-header"><span class="fold-arrow">&#9660;</span><span class="epic-badge">Epic 2</span><a href="https://visable.atlassian.net/browse/UC-137" target="_blank" class="ticket-link"><span class="name">📈 Growth: Keyword Expansion</span></a><span class="epic-badge" style="background:#bbf7d0;color:#166534">UC-137</span><button class="sub-toggle" type="button">🧩 Subtasks (7) Expand</button></div>
   <table>
     <thead><tr><th style="width:140px">Ticket</th><th style="width:300px">Title</th><th style="width:60px">Pri</th><th style="width:90px">Reporter</th><th style="width:90px">Assignee</th><th style="width:170px">Status</th><th style="width:70px">Dep Scope</th><th>Notes</th></tr></thead>
     <tbody>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1092" target="_blank">ARISE-1092</a></td><td>Phase 1+2 - New keyword additions</td><td><span class="pri pri-p0">P0</span></td><td>Xiaoyu Dou</td><td>Zhichen Bi</td><td><span class="status-tag">推全中（二期待分析）</span></td><td>Dev</td><td>保持；二期目标更新为 2w/月/站</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-381" target="_blank">UC-381</a></td><td>[SEO] EP Optimization: Europages.it (All Tickets July 30)</td><td><span class="pri pri-p0">P0</span></td><td>Temitope Longe</td><td>Zhichen Bi</td><td><span class="status-tag">Done</span></td><td>Dev</td><td>Story</td></tr>
-      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-391" target="_blank">UC-391</a></td><td>City CSERP 1,085 old URL internal link update + sitemap cleanup</td><td><span class="pri pri-p0">P0</span></td><td>Temitope Longe</td><td>Xiaoyu Dou</td><td><span class="status-tag">To Be Scheduled</span></td><td>Dev</td><td>父票：<a class="ticket-link" href="https://visable.atlassian.net/browse/UC-381" target="_blank">UC-381</a> | 父票：UC-381</td></tr>
-      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-392" target="_blank">UC-392</a></td><td>Remove irrelevant homepage links, replace with qualified B2B links</td><td><span class="pri pri-p0">P0</span></td><td>Temitope Longe</td><td>Xiaoyu Dou</td><td><span class="status-tag">To Be Scheduled</span></td><td>Dev</td><td>父票：<a class="ticket-link" href="https://visable.atlassian.net/browse/UC-381" target="_blank">UC-381</a> | 父票：UC-381</td></tr>
-      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-393" target="_blank">UC-393</a></td><td>CPP Similar/Popular recommendation module fix</td><td><span class="pri pri-p1">P1</span></td><td>Temitope Longe</td><td>Yunyi Xie</td><td><span class="status-tag">To Be Scheduled</span></td><td>Dev</td><td>父票：<a class="ticket-link" href="https://visable.atlassian.net/browse/UC-381" target="_blank">UC-381</a> | 父票：UC-381</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-382" target="_blank">UC-382</a></td><td>[SEO] EP Optimization: Europages.fr (All Tickets July 30)</td><td><span class="pri pri-p0">P0</span></td><td>Temitope Longe</td><td>Zhichen Bi</td><td><span class="status-tag">Triage</span></td><td>Dev</td><td>Story</td></tr>
-      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-394" target="_blank">UC-394</a></td><td>Indexation Coverage analysis</td><td><span class="pri pri-p1">P1</span></td><td>Temitope Longe</td><td>Temitope Longe</td><td><span class="status-tag">To Be Scheduled</span></td><td>Dev</td><td>父票：<a class="ticket-link" href="https://visable.atlassian.net/browse/UC-382" target="_blank">UC-382</a> | 父票：UC-382</td></tr>
-      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-395" target="_blank">UC-395</a></td><td>Dedupe and merge old/new CPP URLs</td><td><span class="pri pri-p1">P1</span></td><td>Temitope Longe</td><td>Xiaoyu Dou</td><td><span class="status-tag">To Be Scheduled</span></td><td>Dev</td><td>父票：<a class="ticket-link" href="https://visable.atlassian.net/browse/UC-382" target="_blank">UC-382</a> | 父票：UC-382</td></tr>
-      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-396" target="_blank">UC-396</a></td><td>Winner CPP title optimization (region + supplier search intent)</td><td><span class="pri pri-p1">P1</span></td><td>Temitope Longe</td><td>Xiaoyu Dou</td><td><span class="status-tag">To Be Scheduled</span></td><td>Dev</td><td>父票：<a class="ticket-link" href="https://visable.atlassian.net/browse/UC-382" target="_blank">UC-382</a> | 父票：UC-382</td></tr>
-      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-525" target="_blank">UC-525</a></td><td>EP.fr - Link filtered CSERP breadcrumbs to their canonical top-level City CSERP</td><td><span class="pri pri-p1">P1</span></td><td>Temitope Longe</td><td>Xiaoyu Dou</td><td><span class="status-tag">Triage</span></td><td>Dev</td><td>父票：<a class="ticket-link" href="https://visable.atlassian.net/browse/UC-382" target="_blank">UC-382</a> | 父票：UC-382</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-508" target="_blank">UC-508</a></td><td>Fix missing self-referencing hreflang on PDPs across all Europages domains</td><td><span class="pri pri-p1">P1</span></td><td>Temitope Longe</td><td>Xiaoyu Dou</td><td><span class="status-tag">Triage</span></td><td>Dev</td><td>关联到本 Epic</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-379" target="_blank">UC-379</a></td><td>[SEO] Backlinks Phase 2: Merchant Program Execution</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Anna Freddi</td><td><span class="status-tag">To Be Scheduled</span></td><td>Self</td><td>直接执行外链二期（10 商家项目，PRD+设计已 ready，解决商家招募门槛）</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-380" target="_blank">UC-380</a></td><td>[SEO] Showroom New Hot Products Launch</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Pengcheng Hao</td><td><span class="status-tag">To Be Scheduled</span></td><td>External</td><td>含商品质量（合格/精品/定向/新热）+ 180 万增量品评估；与发品团队联评</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-406" target="_blank">UC-406</a></td><td>Keyword Source Quality Improvement (AB2 +0.5)</td><td><span class="pri pri-p0">P0</span></td><td>Jolyne Zhang</td><td>Zhichen Bi</td><td><span class="status-tag">In Progress</span></td><td>PM</td><td>漏斗表 CTR 列</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-407" target="_blank">UC-407</a></td><td>Core Keyword Rewriting (AB2 +0.5)</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Zhichen Bi</td><td><span class="status-tag">In Progress</span></td><td>PM</td><td>漏斗表 CTR 列</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-408" target="_blank">UC-408</a></td><td>Multilingual Keyword Library Quality (AB2 +0.5)</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Zhichen Bi</td><td><span class="status-tag">In Progress</span></td><td>PM</td><td>漏斗表 CTR 列</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-409" target="_blank">UC-409</a></td><td>Multilingual Keyword Mapping</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Zhichen Bi</td><td><span class="status-tag">In Progress</span></td><td>PM</td><td>漏斗5月表 P1</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-410" target="_blank">UC-410</a></td><td>Expand B-class & Native Keywords (AB2 +1)</td><td><span class="pri pri-p0">P0</span></td><td>Jolyne Zhang</td><td>Zhichen Bi</td><td><span class="status-tag">In Progress</span></td><td>PM</td><td>漏斗表 UV-AB% 列</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-411" target="_blank">UC-411</a></td><td>New Channel & Tool Pages (AB2 +1)</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Xiaoyu Dou</td><td><span class="status-tag">In Progress</span></td><td>PM</td><td>漏斗表新渠道列</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-412" target="_blank">UC-412</a></td><td>New Website (AB2 +1)</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Xiaoyu Dou</td><td><span class="status-tag">In Progress</span></td><td>PM</td><td>漏斗表新渠道列</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1092" target="_blank">ARISE-1092</a></td><td>Phase 1+2 - New keyword additions</td><td><span class="pri pri-p0">P0</span></td><td>Xiaoyu Dou</td><td>Zhichen Bi</td><td><span class="status-tag">Rollout</span></td><td>Dev</td><td>Keep; Phase 2 target updated to 20K/mo/site</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-381" target="_blank">UC-381</a></td><td>[SEO] EP Optimization: Europages.it</td><td><span class="pri pri-p0">P0</span></td><td>Temitope Longe</td><td>Zhichen Bi</td><td><span class="status-tag">Done</span></td><td>Dev</td><td>Story</td></tr>
+      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-391" target="_blank">UC-391</a></td><td>City CSERP 1,085 old URL internal link update + sitemap cleanup</td><td><span class="pri pri-p0">P0</span></td><td>Temitope Longe</td><td>Xiaoyu Dou</td><td><span class="status-tag">To Be Scheduled</span></td><td>Dev</td><td>Parent: UC-381</td></tr>
+      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-392" target="_blank">UC-392</a></td><td>Remove irrelevant homepage links, replace with qualified B2B links</td><td><span class="pri pri-p0">P0</span></td><td>Temitope Longe</td><td>Xiaoyu Dou</td><td><span class="status-tag">To Be Scheduled</span></td><td>Dev</td><td>Parent: UC-381</td></tr>
+      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-393" target="_blank">UC-393</a></td><td>CPP Similar/Popular recommendation module fix</td><td><span class="pri pri-p1">P1</span></td><td>Temitope Longe</td><td>Yunyi Xie</td><td><span class="status-tag">To Be Scheduled</span></td><td>Dev</td><td>Parent: UC-381</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-382" target="_blank">UC-382</a></td><td>[SEO] EP Optimization: Europages.fr</td><td><span class="pri pri-p0">P0</span></td><td>Temitope Longe</td><td>Zhichen Bi</td><td><span class="status-tag">Triage</span></td><td>Dev</td><td>Story</td></tr>
+      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-394" target="_blank">UC-394</a></td><td>Indexation Coverage analysis</td><td><span class="pri pri-p1">P1</span></td><td>Temitope Longe</td><td>Temitope Longe</td><td><span class="status-tag">To Be Scheduled</span></td><td>Dev</td><td>Parent: UC-382</td></tr>
+      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-395" target="_blank">UC-395</a></td><td>Dedupe and merge old/new CPP URLs</td><td><span class="pri pri-p1">P1</span></td><td>Temitope Longe</td><td>Xiaoyu Dou</td><td><span class="status-tag">To Be Scheduled</span></td><td>Dev</td><td>Parent: UC-382</td></tr>
+      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-396" target="_blank">UC-396</a></td><td>Winner CPP title optimization (region + supplier intent)</td><td><span class="pri pri-p1">P1</span></td><td>Temitope Longe</td><td>Xiaoyu Dou</td><td><span class="status-tag">To Be Scheduled</span></td><td>Dev</td><td>Parent: UC-382</td></tr>
+      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-525" target="_blank">UC-525</a></td><td>EP.fr - Link filtered CSERP breadcrumbs to canonical top-level City CSERP</td><td><span class="pri pri-p1">P1</span></td><td>Temitope Longe</td><td>Zhichen Bi</td><td><span class="status-tag">Triage</span></td><td>Dev</td><td>Parent: UC-382</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-508" target="_blank">UC-508</a></td><td>Fix missing self-referencing hreflang on PDPs across all Europages domains</td><td><span class="pri pri-p1">P1</span></td><td>Temitope Longe</td><td>Xiaoyu Dou</td><td><span class="status-tag">Triage</span></td><td>Dev</td><td>Linked to this Epic</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-379" target="_blank">UC-379</a></td><td>[SEO] Backlinks Phase 2: Merchant Program Execution</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Anna Freddi</td><td><span class="status-tag">To Be Scheduled</span></td><td>Self</td><td>Execute Backlinks Phase 2 (10 merchant programs, PRD+design ready)</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-380" target="_blank">UC-380</a></td><td>[SEO] Showroom New Hot Products Launch</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Pengcheng Hao</td><td><span class="status-tag">To Be Scheduled</span></td><td>External</td><td>Includes product quality tiers + 1.8M incremental evaluation</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-406" target="_blank">UC-406</a></td><td>Keyword Source Quality Improvement (AB2 +0.5)</td><td><span class="pri pri-p0">P0</span></td><td>Jolyne Zhang</td><td>Zhichen Bi</td><td><span class="status-tag">In Progress</span></td><td>PM</td><td>Funnel table CTR column</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-407" target="_blank">UC-407</a></td><td>Core Keyword Rewriting (AB2 +0.5)</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Zhichen Bi</td><td><span class="status-tag">In Progress</span></td><td>PM</td><td>Funnel table CTR column</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-408" target="_blank">UC-408</a></td><td>Multilingual Keyword Library Quality (AB2 +0.5)</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Zhichen Bi</td><td><span class="status-tag">In Progress</span></td><td>PM</td><td>Funnel table CTR column</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-409" target="_blank">UC-409</a></td><td>Multilingual Keyword Mapping</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Zhichen Bi</td><td><span class="status-tag">In Progress</span></td><td>PM</td><td>Funnel May table P1</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-410" target="_blank">UC-410</a></td><td>Expand B-class & Native Keywords (AB2 +1)</td><td><span class="pri pri-p0">P0</span></td><td>Jolyne Zhang</td><td>Zhichen Bi</td><td><span class="status-tag">In Progress</span></td><td>PM</td><td>Funnel table UV-AB% column</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-411" target="_blank">UC-411</a></td><td>New Channel & Tool Pages (AB2 +1)</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Xiaoyu Dou</td><td><span class="status-tag">In Progress</span></td><td>PM</td><td>Funnel table new channel column</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-412" target="_blank">UC-412</a></td><td>New Website (AB2 +1)</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Xiaoyu Dou</td><td><span class="status-tag">In Progress</span></td><td>PM</td><td>Funnel table new channel column</td></tr>
     </tbody>
   </table>
 </div>
-<!-- ===== Epic 3 ===== -->
+<!-- Epic 3 -->
 <div class="epic-card">
-  <div class="epic-header"><span class="epic-badge">Epic 3</span><a href="https://visable.atlassian.net/browse/UC-89" target="_blank" class="ticket-link"><span class="name">🖱 CTR & On-Page Optimization</span></a><span class="epic-badge" style="background:#bbf7d0;color:#166534">UC-89</span></div>
+  <div class="epic-header"><span class="fold-arrow">&#9660;</span><span class="epic-badge">Epic 3</span><a href="https://visable.atlassian.net/browse/UC-89" target="_blank" class="ticket-link"><span class="name">🖱 CTR & On-Page Optimization</span></a><span class="epic-badge" style="background:#bbf7d0;color:#166534">UC-89</span><button class="sub-toggle" type="button">🧩 Subtasks (6) Expand</button></div>
   <table>
     <thead><tr><th style="width:140px">Ticket</th><th style="width:300px">Title</th><th style="width:60px">Pri</th><th style="width:90px">Reporter</th><th style="width:90px">Assignee</th><th style="width:170px">Status</th><th style="width:70px">Dep Scope</th><th>Notes</th></tr></thead>
     <tbody>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1063" target="_blank">ARISE-1063</a></td><td>TDH copy tiered optimization</td><td><span class="pri pri-p0">P0</span></td><td>Xiaoyu Dou</td><td>Xiaoyu Dou</td><td><span class="status-tag">推全中</span></td><td>Dev</td><td>保持；覆盖 W32 CTR（TD 模板，+2115）</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-528" target="_blank">UC-528</a></td><td>[SEO] TDH (Title/Description/H1) Optimization</td><td><span class="pri pri-p2">P2</span></td><td>Jolyne Zhang</td><td>Zhichen Bi</td><td><span class="status-tag">Triage</span></td><td>PM</td><td>TDH 子工单收纳 Story</td></tr>
-      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-464" target="_blank">UC-464</a></td><td>Sitemap & filter pages: TDH Templates → AI Fallback content</td><td><span class="pri pri-p0">P0</span></td><td>Jolyne Zhang</td><td>Zhichen Bi</td><td><span class="status-tag">Triage</span></td><td>Dev</td><td>父票：<a class="ticket-link" href="https://visable.atlassian.net/browse/UC-528" target="_blank">UC-528</a> | 子工单收纳；UC-528 父级</td></tr>
-      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-228" target="_blank">UC-228</a></td><td>CPP/PDP H1 redesign</td><td><span class="pri pri-p0">P0</span></td><td>Jolyne Zhang</td><td>Zhichen Bi</td><td><span class="status-tag">To Be Scheduled</span></td><td>Dev</td><td>父票：<a class="ticket-link" href="https://visable.atlassian.net/browse/UC-528" target="_blank">UC-528</a> | 已在开发；UC-528 父级</td></tr>
-      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-149" target="_blank">UC-149</a></td><td>wlw.de - Optimize CPP meta titles above 60 chars</td><td><span class="pri pri-p0">P0</span></td><td>Muke Zhang</td><td>Qingqin Li</td><td><span class="status-tag">Done</span></td><td>PM</td><td>父票：<a class="ticket-link" href="https://visable.atlassian.net/browse/UC-528" target="_blank">UC-528</a> | UC-528 父级；TDH 子工单</td></tr>
-      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-144" target="_blank">UC-144</a></td><td>wlw.de CPP - Update SEO titles for remaining AB-generating CPPs</td><td><span class="pri pri-p0">P0</span></td><td>Muke Zhang</td><td>Temitope Longe</td><td><span class="status-tag">Done</span></td><td>PM</td><td>父票：<a class="ticket-link" href="https://visable.atlassian.net/browse/UC-528" target="_blank">UC-528</a> | UC-528 父级；TDH 子工单</td></tr>
-      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-143" target="_blank">UC-143</a></td><td>wlw.de CPP - Update SEO titles for 78 priority AB-growth CPPs</td><td><span class="pri pri-p2">P2</span></td><td>Muke Zhang</td><td>Temitope Longe</td><td><span class="status-tag">Done</span></td><td>PM</td><td>父票：<a class="ticket-link" href="https://visable.atlassian.net/browse/UC-528" target="_blank">UC-528</a> | UC-528 父级；TDH 子工单</td></tr>
-      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-139" target="_blank">UC-139</a></td><td>EP FR PDP - UTF-8 Mojibake Fix (Titles, Descriptions)</td><td><span class="pri pri-p0">P0</span></td><td>Muke Zhang</td><td>Qingqin Li</td><td><span class="status-tag">Done</span></td><td>PM</td><td>父票：<a class="ticket-link" href="https://visable.atlassian.net/browse/UC-528" target="_blank">UC-528</a> | UC-528 父级；TDH 子工单</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-267" target="_blank">UC-267</a></td><td>CPP organic→QDR conversion analysis (inquiry funnel)</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Utkarsha Saraf</td><td><span class="status-tag">Closed</span></td><td>Dev</td><td>CPP 32% UV 仅 17% AB（QDR 占 94%），与 ARISE-1252 分析联动</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-131" target="_blank">UC-131</a></td><td>SERP redesign (merchant card + bottom longtext) = merchant card info pass-through</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>-</td><td><span class="status-tag">To Be Scheduled（8.27 评审）</span></td><td>Dev</td><td>即「商卡信息透传」（+0.5）；保持</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1043" target="_blank">ARISE-1043</a></td><td>Detail page redesign (PDP & CPP)</td><td><span class="pri pri-p0">P0</span></td><td>Yunyi Xie</td><td>Temitope Longe</td><td><span class="status-tag">推全中</span></td><td>Dev</td><td>保持</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1252" target="_blank">ARISE-1252</a></td><td>Longtext optimization</td><td><span class="pri pri-p1">P1</span></td><td>Xiaoyu Dou</td><td>Zhichen Bi</td><td><span class="status-tag">待分析</span></td><td>Dev</td><td>保持；分析完成后评审再拆 Sub-ticket</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-413" target="_blank">UC-413</a></td><td>Search & Recommendation Relevance Optimization (+22% UV-AB%, +8 AB2)</td><td><span class="pri pri-p0">P0</span></td><td>Jolyne Zhang</td><td>Yunyi Xie</td><td><span class="status-tag">In Progress</span></td><td>PM</td><td>漏斗表最大增量项；8.23 同步：搜推侧已提供 DOL-744 实验复盘</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-441" target="_blank">UC-441</a></td><td>User Inquiry Experience Optimization (UV-AB% +11%, AB2 +4)</td><td><span class="pri pri-p0">P0</span></td><td>Jolyne Zhang</td><td>Utkarsha Saraf</td><td><span class="status-tag">In Progress</span></td><td>Dev</td><td>UV→AB 体验举措几乎全部 live</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-442" target="_blank">UC-442</a></td><td>Second Inquiry Experience Optimization (AB2 +6)</td><td><span class="pri pri-p0">P0</span></td><td>Jolyne Zhang</td><td>Utkarsha Saraf</td><td><span class="status-tag">In Progress</span></td><td>Dev</td><td>部分 live 部分 in progress</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1063" target="_blank">ARISE-1063</a></td><td>TDH copy tiered optimization</td><td><span class="pri pri-p0">P0</span></td><td>Xiaoyu Dou</td><td>Xiaoyu Dou</td><td><span class="status-tag">Rollout</span></td><td>Dev</td><td>Keep; covers W32 CTR (TD template, +2115)</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-528" target="_blank">UC-528</a></td><td>[SEO] TDH (Title/Description/H1) Optimization</td><td><span class="pri pri-p2">P2</span></td><td>Jolyne Zhang</td><td>Zhichen Bi</td><td><span class="status-tag">Triage</span></td><td>PM</td><td>Story consolidating TDH subtickets</td></tr>
+      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-464" target="_blank">UC-464</a></td><td>Sitemap & filter pages: TDH Templates → AI Fallback content</td><td><span class="pri pri-p0">P0</span></td><td>Jolyne Zhang</td><td>Zhichen Bi</td><td><span class="status-tag">Triage</span></td><td>Dev</td><td>Subtask of UC-528</td></tr>
+      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-228" target="_blank">UC-228</a></td><td>CPP/PDP H1 redesign</td><td><span class="pri pri-p0">P0</span></td><td>Jolyne Zhang</td><td>Zhichen Bi</td><td><span class="status-tag">To Be Scheduled</span></td><td>Dev</td><td>In dev; subtask of UC-528</td></tr>
+      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-149" target="_blank">UC-149</a></td><td>wlw.de - Optimize CPP meta titles above 60 chars</td><td><span class="pri pri-p0">P0</span></td><td>Muke Zhang</td><td>Qingqin Li</td><td><span class="status-tag">Done</span></td><td>PM</td><td>Subtask of UC-528; TDH</td></tr>
+      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-144" target="_blank">UC-144</a></td><td>wlw.de CPP - Update SEO titles for AB-generating CPPs</td><td><span class="pri pri-p0">P0</span></td><td>Muke Zhang</td><td>Temitope Longe</td><td><span class="status-tag">Done</span></td><td>PM</td><td>Subtask of UC-528; TDH</td></tr>
+      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-143" target="_blank">UC-143</a></td><td>wlw.de CPP - Update SEO titles for 78 priority CPPs</td><td><span class="pri pri-p2">P2</span></td><td>Muke Zhang</td><td>Temitope Longe</td><td><span class="status-tag">Done</span></td><td>PM</td><td>Subtask of UC-528; TDH</td></tr>
+      <tr class="sub"><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-139" target="_blank">UC-139</a></td><td>EP FR PDP - UTF-8 Mojibake Fix (Titles, Descriptions)</td><td><span class="pri pri-p0">P0</span></td><td>Muke Zhang</td><td>Qingqin Li</td><td><span class="status-tag">Done</span></td><td>PM</td><td>Subtask of UC-528; TDH</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-267" target="_blank">UC-267</a></td><td>CPP organic→QDR conversion analysis (inquiry funnel)</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Utkarsha Saraf</td><td><span class="status-tag">Closed</span></td><td>Dev</td><td>CPP 32% UV only 17% AB (QDR 94%), linked with ARISE-1252</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-131" target="_blank">UC-131</a></td><td>SERP redesign (merchant card + bottom longtext) = merchant card info pass-through</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>-</td><td><span class="status-tag">To Be Scheduled（8/27 Review）</span></td><td>Dev</td><td>Merchant card info pass-through (+0.5); keep</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1043" target="_blank">ARISE-1043</a></td><td>Detail page redesign (PDP & CPP)</td><td><span class="pri pri-p0">P0</span></td><td>Yunyi Xie</td><td>Temitope Longe</td><td><span class="status-tag">Rollout</span></td><td>Dev</td><td>Keep</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1252" target="_blank">ARISE-1252</a></td><td>Longtext optimization</td><td><span class="pri pri-p1">P1</span></td><td>Xiaoyu Dou</td><td>Zhichen Bi</td><td><span class="status-tag">Analyzing</span></td><td>Dev</td><td>Keep; review then split subtickets after analysis</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-413" target="_blank">UC-413</a></td><td>Search & Recommendation Relevance (+22% UV-AB%, +8 AB2)</td><td><span class="pri pri-p0">P0</span></td><td>Jolyne Zhang</td><td>Yunyi Xie</td><td><span class="status-tag">In Progress</span></td><td>PM</td><td>Funnel's largest increment; search team provided DOL-744</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-441" target="_blank">UC-441</a></td><td>User Inquiry Experience Optimization (UV-AB% +11%, AB2 +4)</td><td><span class="pri pri-p0">P0</span></td><td>Jolyne Zhang</td><td>Utkarsha Saraf</td><td><span class="status-tag">In Progress</span></td><td>Dev</td><td>UV→AB experience measures nearly all live</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-442" target="_blank">UC-442</a></td><td>Second Inquiry Experience Optimization (AB2 +6)</td><td><span class="pri pri-p0">P0</span></td><td>Jolyne Zhang</td><td>Utkarsha Saraf</td><td><span class="status-tag">In Progress</span></td><td>Dev</td><td>Partially live, partially in progress</td></tr>
     </tbody>
   </table>
 </div>
-<!-- ===== Epic 4 ===== -->
+<!-- Epic 4 -->
 <div class="epic-card">
-  <div class="epic-header"><span class="epic-badge">Epic 4</span><a href="https://visable.atlassian.net/browse/UC-377" target="_blank" class="ticket-link"><span class="name">🏭 PDP Growth & Structured Data</span></a><span class="epic-badge" style="background:#bbf7d0;color:#166534">UC-377</span></div>
+  <div class="epic-header"><span class="fold-arrow">&#9660;</span><span class="epic-badge">Epic 4</span><a href="https://visable.atlassian.net/browse/UC-377" target="_blank" class="ticket-link"><span class="name">🏭 PDP Growth & Structured Data</span></a><span class="epic-badge" style="background:#bbf7d0;color:#166534">UC-377</span></div>
   <table>
     <thead><tr><th style="width:140px">Ticket</th><th style="width:300px">Title</th><th style="width:60px">Pri</th><th style="width:90px">Reporter</th><th style="width:90px">Assignee</th><th style="width:170px">Status</th><th style="width:70px">Dep Scope</th><th>Notes</th></tr></thead>
     <tbody>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-383" target="_blank">UC-383</a></td><td>[SEO] PDP P0: Double Eligible PDP Volume (3.5-score threshold, +52 AB)</td><td><span class="pri pri-p0">P0</span></td><td>Jolyne Zhang</td><td>Pengcheng Hao</td><td><span class="status-tag">In Progress</span></td><td>External</td><td>wlw 41w / ep 增投 47w</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-384" target="_blank">UC-384</a></td><td>[SEO] PDP P1: Quality Score to 4.5 (add text / dedupe / image alt)</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Pengcheng Hao</td><td><span class="status-tag">In Progress</span></td><td>External</td><td>17.6k→35k；图片 alt 由 SEO 团队负责</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-385" target="_blank">UC-385</a></td><td>[SEO] PDP P2: Core Keyword SV into Scoring (DSV +10%)</td><td><span class="pri pri-p2">P2</span></td><td>Jolyne Zhang</td><td>Pengcheng Hao</td><td><span class="status-tag">To Do</span></td><td>External</td><td>关键词质量</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-386" target="_blank">UC-386</a></td><td>[SEO] PDP P1: Structured Field Presentation (AB CVR +10%)</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Yunyi Xie</td><td><span class="status-tag">To Do</span></td><td>External</td><td>字段结构化呈现</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-387" target="_blank">UC-387</a></td><td>[SEO] GMC Enablement: Upload Priced PDPs (Shopping Organic, +1 AB2)</td><td><span class="pri pri-p1">P1</span></td><td>Anna Freddi</td><td>Zhihao Zhang</td><td><span class="status-tag">In Progress</span></td><td>External</td><td>Shopping Organic 渠道增量 +1 AB2</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-250" target="_blank">UC-250</a></td><td>PDP related products image url</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Zhenyu Liu</td><td><span class="status-tag">In Progress</span></td><td>Dev</td><td>开发中</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-127" target="_blank">UC-127</a></td><td>Structured Data (SEMrush review)</td><td><span class="pri pri-p2">P2</span></td><td>Jolyne Zhang</td><td>Jolyne Zhang</td><td><span class="status-tag">To Be Scheduled</span></td><td>Dev</td><td>保持；关联到本 Epic</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-383" target="_blank">UC-383</a></td><td>[SEO] PDP P0: Double Eligible PDP Volume (3.5-score, +52 AB)</td><td><span class="pri pri-p0">P0</span></td><td>Jolyne Zhang</td><td>Pengcheng Hao</td><td><span class="status-tag">In Progress</span></td><td>External</td><td>wlw 41K / ep +47K invest</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-384" target="_blank">UC-384</a></td><td>[SEO] PDP P1: Quality Score to 4.5 (add text/dedupe/image alt)</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Pengcheng Hao</td><td><span class="status-tag">In Progress</span></td><td>External</td><td>17.6K→35K; image alts by SEO team</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-385" target="_blank">UC-385</a></td><td>[SEO] PDP P2: Core Keyword SV into Scoring (DSV +10%)</td><td><span class="pri pri-p2">P2</span></td><td>Jolyne Zhang</td><td>Pengcheng Hao</td><td><span class="status-tag">To Do</span></td><td>External</td><td>Keyword quality</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-386" target="_blank">UC-386</a></td><td>[SEO] PDP P1: Structured Field Presentation (AB CVR +10%)</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Yunyi Xie</td><td><span class="status-tag">To Do</span></td><td>External</td><td>Structured field presentation</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-387" target="_blank">UC-387</a></td><td>[SEO] GMC Enablement: Upload Priced PDPs (Shopping Organic, +1 AB2)</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Zhihao Zhang</td><td><span class="status-tag">In Progress</span></td><td>External</td><td>Shopping Organic channel +1 AB2</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-250" target="_blank">UC-250</a></td><td>PDP related products image url</td><td><span class="pri pri-p1">P1</span></td><td>Chao Wang</td><td>Zhenyu Liu</td><td><span class="status-tag">In Progress</span></td><td>Dev</td><td>In development</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-127" target="_blank">UC-127</a></td><td>Structured Data (SEMrush review)</td><td><span class="pri pri-p2">P2</span></td><td>Jolyne Zhang</td><td>Jolyne Zhang</td><td><span class="status-tag">To Be Scheduled</span></td><td>Dev</td><td>Keep; linked to this Epic</td></tr>
     </tbody>
   </table>
 </div>
-<!-- ===== Epic 5 ===== -->
+<!-- Epic 5 -->
 <div class="epic-card">
-  <div class="epic-header"><span class="epic-badge">Epic 5</span><a href="https://visable.atlassian.net/browse/UC-179" target="_blank" class="ticket-link"><span class="name">🛡 Defense</span></a><span class="epic-badge" style="background:#bbf7d0;color:#166534">UC-179</span></div>
+  <div class="epic-header"><span class="fold-arrow">&#9660;</span><span class="epic-badge">Epic 5</span><a href="https://visable.atlassian.net/browse/UC-179" target="_blank" class="ticket-link"><span class="name">🛡 Defense</span></a><span class="epic-badge" style="background:#bbf7d0;color:#166534">UC-179</span></div>
   <table>
     <thead><tr><th style="width:140px">Ticket</th><th style="width:300px">Title</th><th style="width:60px">Pri</th><th style="width:90px">Reporter</th><th style="width:90px">Assignee</th><th style="width:170px">Status</th><th style="width:70px">Dep Scope</th><th>Notes</th></tr></thead>
     <tbody>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1173" target="_blank">ARISE-1173</a></td><td>Frontend Performance Optimization S1</td><td><span class="pri pri-p1">P1</span></td><td>Temitope Longe</td><td>Zhenyu Liu</td><td><span class="status-tag">5/7 已上线</span></td><td>Dev</td><td>保持</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-388" target="_blank">UC-388</a></td><td>[Defensive] Botify Purchase Evaluation (≤$35k)</td><td><span class="pri pri-p0">P0</span></td><td>Jolyne Zhang</td><td>Jolyne Zhang</td><td><span class="status-tag">Triage</span></td><td>Self</td><td>9 月底 DDL；AB2 +2；当前调研阶段</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-389" target="_blank">UC-389</a></td><td>[Defensive] Web2App Channel Goal Split</td><td><span class="pri pri-p2">P2</span></td><td>Jolyne Zhang</td><td>-</td><td><span class="status-tag">To Be Scheduled</span></td><td>Self</td><td>业务在 align 目标；非开发 ticket</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-414" target="_blank">UC-414</a></td><td>URL optimization</td><td><span class="pri pri-p2">P2</span></td><td>Jolyne Zhang</td><td>-</td><td><span class="status-tag">To Be Scheduled</span></td><td>Self</td><td>主要是要审查一下还有没有url问题</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1173" target="_blank">ARISE-1173</a></td><td>Frontend Performance Optimization S1</td><td><span class="pri pri-p1">P1</span></td><td>Temitope Longe</td><td>Zhenyu Liu</td><td><span class="status-tag">5/7 Live</span></td><td>Dev</td><td>Keep</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-388" target="_blank">UC-388</a></td><td>[Defensive] Botify Purchase Evaluation (≤$35k)</td><td><span class="pri pri-p0">P0</span></td><td>Jolyne Zhang</td><td>Jolyne Zhang</td><td><span class="status-tag">Triage</span></td><td>Self</td><td>Sep EOD DDL; AB2 +2; currently researching</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-389" target="_blank">UC-389</a></td><td>[Defensive] Web2App Channel Goal Split</td><td><span class="pri pri-p2">P2</span></td><td>Jolyne Zhang</td><td>-</td><td><span class="status-tag">To Be Scheduled</span></td><td>Self</td><td>Biz aligning goals; non-dev ticket</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-414" target="_blank">UC-414</a></td><td>URL optimization</td><td><span class="pri pri-p2">P2</span></td><td>Jolyne Zhang</td><td>-</td><td><span class="status-tag">To Be Scheduled</span></td><td>Self</td><td>Review remaining URL issues</td></tr>
     </tbody>
   </table>
 </div>
-<!-- ===== Epic 6 ===== -->
+<!-- Epic 6 -->
 <div class="epic-card">
-  <div class="epic-header"><span class="epic-badge">Epic 6</span><a href="https://visable.atlassian.net/browse/UC-132" target="_blank" class="ticket-link"><span class="name">🔬 SEO Data & Agent Development</span></a><span class="epic-badge" style="background:#bbf7d0;color:#166534">UC-132</span></div>
+  <div class="epic-header"><span class="fold-arrow">&#9660;</span><span class="epic-badge">Epic 6</span><a href="https://visable.atlassian.net/browse/UC-132" target="_blank" class="ticket-link"><span class="name">🔬 SEO Data & Agent Development</span></a><span class="epic-badge" style="background:#bbf7d0;color:#166534">UC-132</span></div>
   <table>
     <thead><tr><th style="width:140px">Ticket</th><th style="width:300px">Title</th><th style="width:60px">Pri</th><th style="width:90px">Reporter</th><th style="width:90px">Assignee</th><th style="width:170px">Status</th><th style="width:70px">Dep Scope</th><th>Notes</th></tr></thead>
     <tbody>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UPR-43" target="_blank">UPR-43</a></td><td>A1 - Traffic Attribution Analysis Agent</td><td><span class="pri pri-p2">P2</span></td><td>Xiaoyu Dou</td><td>-</td><td><span class="status-tag">Closed</span></td><td>Dev</td><td>（Relates）；UPR 侧管理，保持</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UPR-44" target="_blank">UPR-44</a></td><td>A2 - Keyword Discovery & Page Generation Agent</td><td><span class="pri pri-p1">P1</span></td><td>Xiaoyu Dou</td><td>-</td><td><span class="status-tag">In Delivery</span></td><td>Dev</td><td>（Relates）；UPR 侧管理，保持</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UPR-45" target="_blank">UPR-45</a></td><td>A3 - Content Optimization Agent</td><td><span class="pri pri-p1">P1</span></td><td>Xiaoyu Dou</td><td>-</td><td><span class="status-tag">In Delivery</span></td><td>Dev</td><td>（Relates）；UPR 侧管理，保持</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UPR-46" target="_blank">UPR-46</a></td><td>A4 - Defensive SEO Agent</td><td><span class="pri pri-p2">P2</span></td><td>Xiaoyu Dou</td><td>-</td><td><span class="status-tag">Closed</span></td><td>Dev</td><td>（Relates）；UPR 侧管理，保持</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/DAN-785" target="_blank">DAN-785</a></td><td>SEO AB weekly data anomaly (7/10 un-attributable)</td><td><span class="pri pri-p0">P0</span></td><td>Muke Zhang</td><td>Olga Hincu</td><td><span class="status-tag">🔴 需跟</span></td><td>Dev</td><td>数据侧工单，关联挂到本 Epic</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1265~1273" target="_blank">ARISE-1265~1273</a></td><td>UV&AB monitoring system (full chain) + 1276(APP) + 1295(server)</td><td><span class="pri pri-p1">P1</span></td><td>Xiaoyu Dou</td><td>Xiaoyu Dou</td><td><span class="status-tag">已完成/Backlog</span></td><td>Dev</td><td>全部关联到本 Epic</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1189/1099/1108/1192 等" target="_blank">ARISE-1189/1099/1108/1192 等</a></td><td>SEO Agent inspection/fix (30 items)</td><td><span class="pri pri-p1">P1</span></td><td>Xiaoyu Dou</td><td>Xiaoyu Dou</td><td><span class="status-tag">已完成/进行中</span></td><td>Dev</td><td>全部关联到本 Epic</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-29" target="_blank">UC-29</a></td><td>Spam Agent Workflow Creation for EP/WLW</td><td><span class="pri pri-p2">P2</span></td><td>Artur Iliasov</td><td>Artur Iliasov</td><td><span class="status-tag">Done</span></td><td>Dev</td><td>关联到本 Epic</td></tr>
-      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-390" target="_blank">UC-390</a></td><td>[SEO] AB & AB2 Analysis Agent</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Xiaoyu Dou</td><td><span class="status-tag">Triage</span></td><td>Dev</td><td>新增需求：SEO AB 和 AB2 分析 agent</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UPR-43" target="_blank">UPR-43</a></td><td>A1 - Traffic Attribution Analysis Agent</td><td><span class="pri pri-p2">P2</span></td><td>Xiaoyu Dou</td><td>-</td><td><span class="status-tag">Closed</span></td><td>Dev</td><td>Relates; managed by UPR side</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UPR-44" target="_blank">UPR-44</a></td><td>A2 - Keyword Discovery & Page Generation Agent</td><td><span class="pri pri-p1">P1</span></td><td>Xiaoyu Dou</td><td>-</td><td><span class="status-tag">In Delivery</span></td><td>Dev</td><td>Relates; managed by UPR side</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UPR-45" target="_blank">UPR-45</a></td><td>A3 - Content Optimization Agent</td><td><span class="pri pri-p1">P1</span></td><td>Xiaoyu Dou</td><td>-</td><td><span class="status-tag">In Delivery</span></td><td>Dev</td><td>Relates; managed by UPR side</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UPR-46" target="_blank">UPR-46</a></td><td>A4 - Defensive SEO Agent</td><td><span class="pri pri-p2">P2</span></td><td>Xiaoyu Dou</td><td>-</td><td><span class="status-tag">Closed</span></td><td>Dev</td><td>Relates; managed by UPR side</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/DAN-785" target="_blank">DAN-785</a></td><td>SEO AB weekly data anomaly (7/10 un-attributable)</td><td><span class="pri pri-p0">P0</span></td><td>Muke Zhang</td><td>Olga Hincu</td><td><span class="status-tag">🔴 Follow Up</span></td><td>Dev</td><td>Data-side ticket, linked to this Epic</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1265~1273" target="_blank">ARISE-1265~1273</a></td><td>UV&AB monitoring system (full chain) + 1276(APP) + 1295(server)</td><td><span class="pri pri-p1">P1</span></td><td>Xiaoyu Dou</td><td>Xiaoyu Dou</td><td><span class="status-tag">Complete/Backlog</span></td><td>Dev</td><td>All linked to this Epic</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/ARISE-1189/1099 等" target="_blank">ARISE-1189/1099 等</a></td><td>SEO Agent inspection/fix (30 items)</td><td><span class="pri pri-p1">P1</span></td><td>Xiaoyu Dou</td><td>Xiaoyu Dou</td><td><span class="status-tag">Complete / In Progress</span></td><td>Dev</td><td>All linked to this Epic</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-29" target="_blank">UC-29</a></td><td>Spam Agent Workflow Creation for EP/WLW</td><td><span class="pri pri-p2">P2</span></td><td>Artur Iliasov</td><td>Artur Iliasov</td><td><span class="status-tag">Done</span></td><td>Dev</td><td>Linked to this Epic</td></tr>
+      <tr><td class="mono"><a class="ticket-link" href="https://visable.atlassian.net/browse/UC-390" target="_blank">UC-390</a></td><td>[SEO] AB & AB2 Analysis Agent</td><td><span class="pri pri-p1">P1</span></td><td>Jolyne Zhang</td><td>Xiaoyu Dou</td><td><span class="status-tag">Triage</span></td><td>Dev</td><td>New: SEO AB and AB2 analysis agent</td></tr>
     </tbody>
   </table>
 </div>
-<!-- ===== Epic 7 ===== -->
+<!-- Epic 7 -->
 <div class="epic-card">
-  <div class="epic-header"><span class="epic-badge">Epic 7</span><a href="https://visable.atlassian.net/browse/UC-214" target="_blank" class="ticket-link"><span class="name">⚖️ Compliance & Risk Control</span></a><span class="epic-badge" style="background:#bbf7d0;color:#166534">UC-214</span></div>
+  <div class="epic-header"><span class="fold-arrow">&#9660;</span><span class="epic-badge">Epic 7</span><a href="https://visable.atlassian.net/browse/UC-214" target="_blank" class="ticket-link"><span class="name">⚖️ Compliance & Risk Control</span></a><span class="epic-badge" style="background:#bbf7d0;color:#166534">UC-214</span></div>
   <table>
     <thead><tr><th style="width:140px">Ticket</th><th style="width:300px">Title</th><th style="width:60px">Pri</th><th style="width:90px">Reporter</th><th style="width:90px">Assignee</th><th style="width:170px">Status</th><th style="width:70px">Dep Scope</th><th>Notes</th></tr></thead>
     <tbody>
@@ -273,7 +254,7 @@
   </table>
 </div>
 
-<!-- ===== 汇总 ===== -->
+<!-- Summary -->
 <h2 class="section-title">📋 Summary</h2>
 <div class="summary-grid">
   <div class="summary-card"><div class="num" style="color:var(--green)">7</div><div class="lbl">🏗 Epics</div></div>
@@ -281,11 +262,86 @@
 </div>
 
 <div class="foot-note">
-  📋 Inventory 11 items（2026-08 funnel review，total AB2 +22.5）：拓词质量×3 + 多语言词库映射 + 拓B类词 + 新频道/工具页 + 新站点 + 搜推相关性（UV-AB% +22%，AB2 +8）+ 询盘体验×2（AB2 +4/+6）+ url 优化。<br>
-  Tickets created 11 items（UC-406~414 + UC-441~442）；2 items covered by existing ARISE tickets：sitemap / 蚕食聚簇。
+  📋 <b>Inventory 11 items</b> (2026-08 funnel review, total AB2 +22.5): Keyword quality ×3 + Multilingual mapping + B-class keywords + New channels/tools + New site + Search relevance (UV-AB% +22%, AB2 +8) + Inquiry experience ×2 (AB2 +4/+6) + URL optimization.<br>  Tickets created 11 (UC-406~414 + UC-441~442); 2 items covered by existing ARISE tickets: sitemap / cannibalization clusters.
 </div>
 
 <footer>2026-08-26 · SEO Project Master Table (External)</footer>
 </div>
+
+<script>(function(){
+var body=document.getElementById('tocBody');
+if(!body)return;
+var nodes=document.querySelectorAll('.goal-card,.epic-card,h2.section-title');
+var items=[];
+nodes.forEach(function(el){
+  if(el.classList.contains('epic-card')&&!el.querySelector('.epic-header'))return;
+  var name=el.querySelector('.epic-header .name,.goal-name');
+  var badge=el.querySelector('.epic-header .epic-badge,.goal-badge');
+  var link=el.querySelector('a[href*="browse/"]');
+  var label=name?name.textContent.replace(/\s+/g,' ').trim():'';
+  if(!label)label=el.textContent.replace(/\s+/g,' ').trim().slice(0,30);
+  var tk='';
+  if(badge&&/Epic|Goal/i.test(badge.textContent))tk=badge.textContent.trim();
+  else if(link){var m=link.href.match(/browse\/([A-Z]+-\d+)/);if(m)tk=m[1];}
+  if(!el.id)el.id='sec'+(items.length+1);
+  items.push({id:el.id,label:label.slice(0,40),tk:tk});
+});
+items.forEach(function(it){
+  var a=document.createElement('a');
+  a.href='#'+it.id;
+  a.textContent=it.label;
+  if(it.tk){var s=document.createElement('span');s.className='tk';s.textContent=it.tk;a.appendChild(s);}
+  body.appendChild(a);
+});
+var links=Array.prototype.slice.call(body.querySelectorAll('a'));
+function onScroll(){
+  var pos=window.scrollY+100,idx=-1;
+  items.forEach(function(it,i){
+    var el=document.getElementById(it.id);
+    if(el&&el.getBoundingClientRect().top+window.scrollY<=pos)idx=i;
+  });
+  links.forEach(function(l,i){l.classList.toggle('active',i===idx);});
+}
+window.addEventListener('scroll',onScroll,{passive:true});
+onScroll();
+links.forEach(function(l){
+  l.addEventListener('click',function(e){
+    e.preventDefault();
+    var t=document.getElementById(l.getAttribute('href').slice(1));
+    if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+    var toc=document.getElementById('toc');
+    if(toc)toc.classList.remove('open');
+  });
+});
+document.getElementById('tocToggle').addEventListener('click',function(){
+  document.getElementById('toc').classList.toggle('open');
+});
+})();</script>
+<script>(function(){
+document.querySelectorAll('.epic-header').forEach(function(h){
+  h.addEventListener('click',function(e){
+    if(e.target.closest('.sub-toggle')) return;
+    var table=h.closest('.epic-card').querySelector('table');
+    var arrow=h.querySelector('.fold-arrow');
+    var collapsed=table.style.display==='none';
+    table.style.display=collapsed?'':'none';
+    if(arrow)arrow.classList.toggle('collapsed',!collapsed);
+  });
+});
+document.querySelectorAll('.epic-card').forEach(function(card){
+  var subs=card.querySelectorAll('tr.sub');
+  var btn=card.querySelector('.sub-toggle');
+  if(!subs.length||!btn)return;
+  var hidden=true;
+  subs.forEach(function(s){s.style.display='none';});
+  btn.addEventListener('click',function(e){
+    e.stopPropagation();
+    hidden=!hidden;
+    subs.forEach(function(s){s.style.display=hidden?'none':'';});
+    btn.textContent=hidden?'🧩 Subtasks ('+subs.length+') Expand':'🧩 Subtasks Collapse';
+    btn.classList.toggle('on',!hidden);
+  });
+});
+})();</script>
 </body>
 </html>
